@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFManagementSystem", "WFManagementSystem\WFManagementSystem.csproj", "{516BD0A8-D9B0-40B9-A1EC-6EBA52442605}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{115C87EC-81BE-438F-A28B-DE063698BF4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{516BD0A8-D9B0-40B9-A1EC-6EBA52442605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{516BD0A8-D9B0-40B9-A1EC-6EBA52442605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{516BD0A8-D9B0-40B9-A1EC-6EBA52442605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{516BD0A8-D9B0-40B9-A1EC-6EBA52442605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115C87EC-81BE-438F-A28B-DE063698BF4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115C87EC-81BE-438F-A28B-DE063698BF4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115C87EC-81BE-438F-A28B-DE063698BF4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115C87EC-81BE-438F-A28B-DE063698BF4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
