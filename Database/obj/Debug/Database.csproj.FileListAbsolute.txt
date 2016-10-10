@@ -1,0 +1,13 @@
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Database.dll.config
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Database.dll
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Database.pdb
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.dll
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.xml
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\obj\Debug\Database.dll
+C:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\obj\Debug\Database.pdb
