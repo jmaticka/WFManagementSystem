@@ -10,9 +10,11 @@ namespace Database
 {
     public class DBContextWFManagementSystem : DbContext
     {
+        public static readonly DBContextWFManagementSystem Instance = new DBContextWFManagementSystem();
+        private DBContextWFManagementSystem() {}
         public DbSet<Workflow> Workflows { get; set; }
         public DbSet<Block> Blocks { get; set; }
-        public DbSet<BlockType> BlockTypes { get; set; }
+        public DbSet<Field> BlockTypes { get; set; }
 
 
     }
