@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Database.Entities
         public DateTime DateTimeStarted { get; set; }
         public DateTime DateTimeEnded { get; set; }
         public Workflow Workflow { get; set; }
+        public IdentityUser UserStarted { get; set; }
 
     }
 }

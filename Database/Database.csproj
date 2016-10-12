@@ -59,7 +59,11 @@
   <ItemGroup>
     <Compile Include="DBContextWFManagementSystem.cs" />
     <Compile Include="DML\DMLWorkflow.cs" />
+    <Compile Include="DML\IDMLBlock.cs" />
+    <Compile Include="DML\IDMLBlockType.cs" />
+    <Compile Include="DML\IDMLField.cs" />
     <Compile Include="DML\IDMLWorkflow.cs" />
+    <Compile Include="DML\IDMLWorkflowInstance.cs" />
     <Compile Include="Entities\Block.cs" />
     <Compile Include="Entities\BlockType.cs" />
     <Compile Include="Entities\Field.cs" />
