@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Database.Entities
 {
-    public class WorkflowInstance
+    public class WorkflowInstance : EntityBase
     {
-        public int ID { get; set; }
         public DateTime DateTimeStarted { get; set; }
         public DateTime DateTimeEnded { get; set; }
         public Workflow Workflow { get; set; }

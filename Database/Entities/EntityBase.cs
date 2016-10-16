@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Database.Entities
 {
-    public class BlockType : EntityBase
+    public abstract class EntityBase
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-
+        public int ID { get; set; }
     }
 }

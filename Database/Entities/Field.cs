@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Database.Entities
 {
-    public class Field
+    public class Field : EntityBase
     {
-        public int ID { get; set; }
         public string Value { get; set; }
         public DateTime DateTimeEnded { get; set; }
-        public Block Block { get; set; }
-        public WorkflowInstance WorkflowInstance { get; set; }
+        public virtual Block Block { get; set; }
+        public virtual WorkflowInstance WorkflowInstance { get; set; }
         public IdentityUser Worker { get; set; }
 
     }

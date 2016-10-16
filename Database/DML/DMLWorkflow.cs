@@ -10,41 +10,46 @@ namespace Database.DML
 {
     class DMLWorkflow : IDMLWorkflow
     {
-        private DBContextWFManagementSystem _dbContext;
-
-        public DMLWorkflow()
-        {
-            _dbContext = DBContextWFManagementSystem.Instance;
-        }
-
+        
         public List<Workflow> GetAllByUser(IdentityUser user)
         {
-            var res = _dbContext.Workflows
-                .Where(x => x.UserCreated == user)
-                .ToList();
-            return res;
+            using (var dbContext = new DBContextWFManagementSystem())
+            {
+                var res = dbContext.Workflows
+                        .Where(x => x.UserCreated == user)
+                        .ToList();
+                return res; 
+            }
         }
 
         public Workflow Insert(Workflow workflow)
         {
+
             try
             {
-                var res = _dbContext.Workflows.Add(workflow);
-                _dbContext.SaveChanges();
-                return res;
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var res = dbContext.Workflows.Add(workflow);
+                    dbContext.SaveChanges();
+                    return res;
+                }
             }
             catch (Exception e)
             {
                 throw new Exception("Problem pridat workflow: {0}", e);
             }
+
         }
         public Workflow Update(Workflow workflow)
         {
             try
             {
-                var res = _dbContext.Workflows.Add(workflow);
-                _dbContext.SaveChanges();
-                return res;
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var res = dbContext.Workflows.Add(workflow);
+                    dbContext.SaveChanges();
+                    return res; 
+                }
             }
             catch (Exception e)
             {
@@ -53,10 +58,13 @@ namespace Database.DML
         }
         public Workflow Delete(Workflow workflow)
         {
-            try { 
-                var res = _dbContext.Workflows.Remove(workflow);
-                _dbContext.SaveChanges();
-                return res;
+            try {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var res = dbContext.Workflows.Remove(workflow);
+                    dbContext.SaveChanges();
+                    return res;
+                }
             }
             catch(Exception e)
             {
