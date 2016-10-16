@@ -1,0 +1,14 @@
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\WFMDatabase.dll.config
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\WFMDatabase.dll
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\WFMDatabase.pdb
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\EntityFramework.dll
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\EntityFramework.xml
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\obj\Debug\WFMDatabase.dll
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\obj\Debug\WFMDatabase.pdb
+C:\Users\Holda\Source\Repos\WFManagementSystem\Database\obj\Debug\WFMDatabase.csprojResolveAssemblyReference.cache

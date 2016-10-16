@@ -70,6 +70,7 @@
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\Workflow.cs" />
     <Compile Include="Entities\WorkflowInstance.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

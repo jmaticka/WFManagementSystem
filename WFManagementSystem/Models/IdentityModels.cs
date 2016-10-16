@@ -24,6 +24,7 @@ namespace WFManagementSystem.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        
 
         public static ApplicationDbContext Create()
         {
