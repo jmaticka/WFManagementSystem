@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Database.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
+using WFMDatabase;
+using WFMDatabase.DML;
+using WFMDatabase.Entities;
 
-namespace Database.DML
+namespace WFMDatabase.DML
 {
     class DMLWorkflow : IDMLWorkflow
     {

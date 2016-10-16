@@ -7,8 +7,8 @@
     <ProjectGuid>{FA06970F-9A1F-4508-A279-472A838D8E70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Database</RootNamespace>
-    <AssemblyName>Database</AssemblyName>
+    <RootNamespace>WFMDatabase</RootNamespace>
+    <AssemblyName>WFMDatabase</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
