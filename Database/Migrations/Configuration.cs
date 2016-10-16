@@ -9,7 +9,7 @@ namespace WFMDatabase.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(WFMDatabase.DBContextWFManagementSystem context)
