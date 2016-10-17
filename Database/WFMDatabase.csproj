@@ -64,13 +64,13 @@
     <Compile Include="DML\IDMLField.cs" />
     <Compile Include="DML\IDMLWorkflow.cs" />
     <Compile Include="DML\IDMLWorkflowInstance.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Block.cs" />
     <Compile Include="Entities\BlockType.cs" />
     <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\Workflow.cs" />
     <Compile Include="Entities\WorkflowInstance.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +79,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

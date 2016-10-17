@@ -12,3 +12,17 @@ C:\Users\Holda\Source\Repos\WFManagementSystem\Database\bin\Debug\Microsoft.AspN
 C:\Users\Holda\Source\Repos\WFManagementSystem\Database\obj\Debug\WFMDatabase.dll
 C:\Users\Holda\Source\Repos\WFManagementSystem\Database\obj\Debug\WFMDatabase.pdb
 C:\Users\Holda\Source\Repos\WFManagementSystem\Database\obj\Debug\WFMDatabase.csprojResolveAssemblyReference.cache
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\WFMDatabase.dll.config
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\WFMDatabase.dll
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\WFMDatabase.pdb
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.dll
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.SqlServer.dll
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.xml
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\EntityFramework.SqlServer.xml
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\obj\Debug\WFMDatabase.csprojResolveAssemblyReference.cache
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\obj\Debug\WFMDatabase.dll
+c:\Users\Honza\Documents\Visual Studio 2015\Projects\WFManagementSystem\Database\obj\Debug\WFMDatabase.pdb
