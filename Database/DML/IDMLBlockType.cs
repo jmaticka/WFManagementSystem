@@ -2,7 +2,7 @@
 
 namespace WFMDatabase.DML
 {
-    interface IDMLBlockType
+    public interface IDMLBlockType
     {
         BlockType Insert(BlockType blockType);
         BlockType Update(BlockType blockType);

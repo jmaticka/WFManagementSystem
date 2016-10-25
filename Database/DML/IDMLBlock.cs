@@ -8,7 +8,7 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    interface IDMLBlock
+    public interface IDMLBlock
     {
         List<Block> GetAllByWorkflow(Workflow workflow);
         Block Insert(Block block);

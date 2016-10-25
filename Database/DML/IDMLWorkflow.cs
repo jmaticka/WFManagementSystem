@@ -5,9 +5,10 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    interface IDMLWorkflow
+    public interface IDMLWorkflow
     {
-        List<Workflow> GetAllByUser(IdentityUser user);
+        List<Workflow> GetAll();
+        List<Workflow> GetAllByUser(string userId);
         Workflow Insert(Workflow workflow);
         Workflow Update(Workflow workflow);
         Workflow Delete(Workflow workflow);

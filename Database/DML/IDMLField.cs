@@ -4,7 +4,7 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    interface IDMLField
+    public interface IDMLField
     {
         List<Field> GetAllByBlock(Block block);
         List<Field> GetAllByInstance(int workflowInstanceId);

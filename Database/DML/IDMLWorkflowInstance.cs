@@ -4,7 +4,7 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    interface IDMLWorkflowInstance
+    public interface IDMLWorkflowInstance
     {
         List<WorkflowInstance> GetAllByUser(IdentityUser user);
         List<WorkflowInstance> GetAllByWorkflow(Workflow workflow);

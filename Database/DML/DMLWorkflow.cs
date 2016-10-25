@@ -8,17 +8,28 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    class DMLWorkflow : IDMLWorkflow
+    public class DMLWorkflow : IDMLWorkflow
     {
-        
-        public List<Workflow> GetAllByUser(IdentityUser user)
+        public List<Workflow> GetAll()
         {
             using (var dbContext = new DBContextWFManagementSystem())
             {
                 var res = dbContext.Workflows
-                        .Where(x => x.UserCreated == user)
+                        .Where(x => x.IsActual == true)
                         .ToList();
-                return res; 
+                return res;
+            }
+        }
+
+        public List<Workflow> GetAllByUser(string userId)
+        {
+            using (var dbContext = new DBContextWFManagementSystem())
+            {
+                var res = dbContext.Workflows
+                        .Where(x => x.UserCreated.Id == userId)
+                        .Where(x => x.IsActual == true)
+                        .ToList();
+                return res;
             }
         }
 
@@ -48,7 +59,7 @@ namespace WFMDatabase.DML
                 {
                     var res = dbContext.Workflows.Add(workflow);
                     dbContext.SaveChanges();
-                    return res; 
+                    return res;
                 }
             }
             catch (Exception e)
@@ -58,7 +69,8 @@ namespace WFMDatabase.DML
         }
         public Workflow Delete(Workflow workflow)
         {
-            try {
+            try
+            {
                 using (var dbContext = new DBContextWFManagementSystem())
                 {
                     var res = dbContext.Workflows.Remove(workflow);
@@ -66,10 +78,12 @@ namespace WFMDatabase.DML
                     return res;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Problem odebrat workflow: {0}", e);
             }
         }
+
+
     }
 }

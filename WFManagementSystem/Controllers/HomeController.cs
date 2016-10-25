@@ -4,13 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WFManagementSystem.ViewModels;
-using WFMDatabase;
 
 namespace WFManagementSystem.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        DBContextWFManagementSystem test;
         public ActionResult Index()
         {
             ViewBag.Message = "Akce u běžících procesů, které je třeba vykonat";
