@@ -59,20 +59,26 @@
             </div>
         </div>
 
-    </div>
-
-
-    <div class="form-group row">
-        <div class="col-lg-6">
-            <input class="btn btn-primary form-control" type="submit" value="ulož" />
-        </div>
-        <div class="col-lg-6">
-            <span class="btn btn-danger form-control">
-                @Html.ActionLink("zrušit", "Index")
+        <div class="col-lg-10 col-lg-offset-1">
+            <span class="btn btn-primary form-control addBlock">
+                <strong>@Html.ActionLink("Přidat nový blok workflow", "Index")</strong>
             </span>
         </div>
 
     </div>
+
+
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <input class="btn btn-success form-control" type="submit" value="ulož" />
+            </div>
+            <div class="col-lg-6">
+                <span class="btn btn-danger form-control">
+                    <strong>@Html.ActionLink("zrušit", "Index")</strong>
+                </span>
+            </div>
+
+        </div>
 }
 
 
