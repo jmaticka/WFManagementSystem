@@ -1,0 +1,81 @@
+﻿@using WFManagementSystem.ViewModels
+@model ManageWorkflowsViewModel
+
+@{
+    ViewBag.Title = "Tvorba workflow";
+    SelectList BlockTypes = (SelectList)ViewBag.BlockTypes;
+    SelectList Users = (SelectList)ViewBag.Users;
+
+
+}
+
+<h2 class="text-center">Tvorba Workflow</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group first text-center">
+        @Html.LabelFor(model => model.WorkflowName, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.EditorFor(model => model.WorkflowName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.WorkflowName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row block">
+
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.BlockName, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.BlockName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BlockName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.BlockDescription, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.BlockDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BlockDescription, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.BlockWorkerId, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.DropDownListFor(model => model.BlockWorkerId, Users, "vyber..", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BlockWorkerId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.BlockTypeId, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.DropDownListFor(model => model.BlockTypeId, BlockTypes, "vyber..", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BlockTypeId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <input class="btn btn-primary form-control" type="submit" value="ulož" />
+        </div>
+        <div class="col-lg-6">
+            <span class="btn btn-danger form-control">
+                @Html.ActionLink("zrušit", "Index")
+            </span>
+        </div>
+
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

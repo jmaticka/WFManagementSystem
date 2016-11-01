@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBContextWFManagementSystem.cs" />
+    <Compile Include="DML\DMLBlockType.cs" />
     <Compile Include="DML\DMLWorkflow.cs" />
     <Compile Include="DML\IDMLBlock.cs" />
     <Compile Include="DML\IDMLBlockType.cs" />
@@ -71,6 +72,15 @@
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\Workflow.cs" />
     <Compile Include="Entities\WorkflowInstance.cs" />
+    <Compile Include="Migrations\201610171156598_InitialCreate.cs" />
+    <Compile Include="Migrations\201610171156598_InitialCreate.Designer.cs">
+      <DependentUpon>201610171156598_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611011525440_BlockType.cs" />
+    <Compile Include="Migrations\201611011525440_BlockType.Designer.cs">
+      <DependentUpon>201611011525440_BlockType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +88,14 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610171156598_InitialCreate.resx">
+      <DependentUpon>201610171156598_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611011525440_BlockType.resx">
+      <DependentUpon>201611011525440_BlockType.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

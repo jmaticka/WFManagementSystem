@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Identity.EntityFramework;
-using WFMDatabase;
-using WFMDatabase.DML;
 using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML

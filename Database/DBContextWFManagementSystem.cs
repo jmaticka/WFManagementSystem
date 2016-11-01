@@ -15,7 +15,7 @@ namespace WFMDatabase
         
         public DbSet<Workflow> Workflows { get; set; }
         public DbSet<Block> Blocks { get; set; }
-        public DbSet<Field> BlockTypes { get; set; }
+        public DbSet<BlockType> BlockTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

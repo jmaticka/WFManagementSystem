@@ -14,15 +14,21 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+form .first {
+    margin-bottom: 3em;
 }
+
+form .block {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
 .btn a {
     color: white;
     text-decoration: none;
-
 }
 
