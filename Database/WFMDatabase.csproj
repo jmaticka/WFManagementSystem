@@ -80,6 +80,18 @@
     <Compile Include="Migrations\201611011525440_BlockType.Designer.cs">
       <DependentUpon>201611011525440_BlockType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611051943192_some changes.cs" />
+    <Compile Include="Migrations\201611051943192_some changes.Designer.cs">
+      <DependentUpon>201611051943192_some changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611051949384_roles seed.cs" />
+    <Compile Include="Migrations\201611051949384_roles seed.Designer.cs">
+      <DependentUpon>201611051949384_roles seed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611051957197_user seed.cs" />
+    <Compile Include="Migrations\201611051957197_user seed.Designer.cs">
+      <DependentUpon>201611051957197_user seed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +107,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611011525440_BlockType.resx">
       <DependentUpon>201611011525440_BlockType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611051943192_some changes.resx">
+      <DependentUpon>201611051943192_some changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611051949384_roles seed.resx">
+      <DependentUpon>201611051949384_roles seed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611051957197_user seed.resx">
+      <DependentUpon>201611051957197_user seed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

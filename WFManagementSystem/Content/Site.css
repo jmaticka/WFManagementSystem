@@ -44,3 +44,8 @@ form .block .col-lg-10 .addBlock {
 }
 /* konec css pro spravu workflow */
 
+footer {
+    padding-top:1em;
+    clear: both;
+}
+
