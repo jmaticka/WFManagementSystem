@@ -9,11 +9,15 @@
 
 }
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/angularWorkflow")
+}
+
 <h2 class="text-center">Tvorba Workflow</h2>
+<div ng-app="app-workflow">
 
 
-@using (Html.BeginForm())
-{
     @Html.AntiForgeryToken()
 
     <div class="form-group first text-center">
@@ -23,65 +27,103 @@
             @Html.ValidationMessageFor(model => model.WorkflowName, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group row block">
 
-        <div class="col-lg-6">
-            @Html.LabelFor(model => model.BlockName, htmlAttributes: new { @class = "control-label" })
-            <div>
-                @Html.EditorFor(model => model.BlockName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlockName, "", new { @class = "text-danger" })
+    <div ng-controller="workflowController as vm">
+        <div ng-repeat="block in vm.blocks" class="form-group row block">
+            <div class="col-lg-6">
+                <label class="control-label">Název bloku</label>
+                <div>
+                    <span class="form-control">block.name</span>
+                </div>
             </div>
+
+            <div class="col-lg-6">
+                <label class="control-label">Popis bloku</label>
+                <div>
+                    <span class="form-control">block.description</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <label class="control-label">Výchozí uživatel</label>
+                <div>
+                    <span class="form-control">block.worker.name</span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label class="control-label">Typ bloku</label>
+                <div>
+                    <span class="form-control">block.blockType.name</span>
+                </div>
+            </div>
+
+
         </div>
 
-        <div class="col-lg-6">
-            @Html.LabelFor(model => model.BlockDescription, htmlAttributes: new { @class = "control-label" })
-            <div>
-                @Html.EditorFor(model => model.BlockDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BlockDescription, "", new { @class = "text-danger" })
 
+        <form novalidate name="newBlockForm" class="form-group row block" ng-submit="vm.addBlock()">
+
+            <div class="col-lg-6">
+                <label for="name" class="control-label">Název bloku</label>
+                <div>
+                    <input type="text" id="name" name="name" class="form-control" ng-model="vm.newBlock.name" required ng-minlength="5" />
+                    <span ng-show="newBlockForm.name.$error.required" class="text-warning">Je třeba zadat název bloku</span>
+                    <span ng-show="newBlockForm.name.$error.minlength" class="text-warning">Název bloku musí mít minimálně 5 písmen</span>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-6">
-            @Html.LabelFor(model => model.BlockWorkerId, htmlAttributes: new { @class = "control-label" })
-            <div>
-                @Html.DropDownListFor(model => model.BlockWorkerId, Users, "vyber..", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BlockWorkerId, "", new { @class = "text-danger" })
-
+            <div class="col-lg-6">
+                <label for="description" class="control-label">Popis bloku</label>
+                <div>
+                    <input type="text" id="desciption" name="description" class="form-control" ng-model="vm.newBlock.description" />
+                </div>
             </div>
+
+            <div class="col-lg-6">
+                <label for="worker" class="control-label">Výchozí uživatel</label>
+                <div>
+                    <select class="form-control" id="worker" name="worker" ng-model="vm.newBlock.worker">
+                        @foreach (var user in Users)
+                        {
+                            <option name="@user.Text" id="@user.Value">@user.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label for="blockType" class="control-label">Typ bloku</label>
+                <div>
+                    <select class="form-control" id="blockType" name="blockType" ng-model="vm.newBlock.blockType">
+                        @foreach (var blockType in BlockTypes)
+                        {
+                            <option name="@blockType.Text" id="@blockType.Value">@blockType.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-lg-offset-1">
+                <input type="submit"
+                       value="Přidat nový blok workflow" class="btn btn-primary form-control addBlock"
+                       ng-disabled="newBlockForm.$invalid" />
+            </div>
+
+        </form>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <input class="btn btn-success form-control" type="submit" value="ulož" />
         </div>
         <div class="col-lg-6">
-            @Html.LabelFor(model => model.BlockTypeId, htmlAttributes: new { @class = "control-label" })
-            <div>
-                @Html.DropDownListFor(model => model.BlockTypeId, BlockTypes, "vyber..", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BlockTypeId, "", new { @class = "text-danger" })
-
-            </div>
-        </div>
-
-        <div class="col-lg-10 col-lg-offset-1">
-            <span class="btn btn-primary form-control addBlock">
-                <strong>@Html.ActionLink("Přidat nový blok workflow", "Index")</strong>
+            <span class="btn btn-danger form-control">
+                <strong>@Html.ActionLink("zrušit", "Index")</strong>
             </span>
         </div>
 
     </div>
 
 
-        <div class="form-group row">
-            <div class="col-lg-6">
-                <input class="btn btn-success form-control" type="submit" value="ulož" />
-            </div>
-            <div class="col-lg-6">
-                <span class="btn btn-danger form-control">
-                    <strong>@Html.ActionLink("zrušit", "Index")</strong>
-                </span>
-            </div>
+</div>
 
-        </div>
-}
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

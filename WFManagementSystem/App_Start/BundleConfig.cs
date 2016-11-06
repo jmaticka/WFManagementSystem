@@ -23,6 +23,11 @@ namespace WFManagementSystem
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/angularWorkflow").Include(
+                      "~/Scripts/angular.min.js",
+                      "~/Scripts/AppAngular/app-workflow.js",
+                       "~/Scripts/AppAngular/workflowController.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",

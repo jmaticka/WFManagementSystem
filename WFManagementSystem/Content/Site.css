@@ -30,7 +30,7 @@ form .first {
     margin-bottom: 3em;
 }
 
-form .block {
+.block {
     padding-top: 1em;
     padding-bottom: 1em;
     margin-left: 0.25em;
@@ -39,7 +39,7 @@ form .block {
     border-radius: 5px;
 }
 
-form .block .col-lg-10 .addBlock {
+.block .col-lg-10 .addBlock {
     margin-top: 1em;
 }
 /* konec css pro spravu workflow */

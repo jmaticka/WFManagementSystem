@@ -26,7 +26,19 @@ namespace WFMDatabase.DML
 
         public BlockType Insert(BlockType blockType)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var res = dbContext.BlockTypes.Add(blockType);
+                    dbContext.SaveChanges();
+                    return res;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Problem pridat typ workflow: {0}", e);
+            }
         }
 
         public BlockType Update(BlockType blockType)

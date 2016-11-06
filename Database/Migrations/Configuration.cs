@@ -74,6 +74,56 @@ namespace WFMDatabase.Migrations
             }
 
 
+            if (!(context.BlockTypes.Any(bt => bt.Name == "start")))
+            {
+                var blockTypeManager = new DML.DMLBlockType();
+                var blockType = new Entities.BlockType
+                {
+                    Name = "start",
+                    Description = "Zaèátek toku workflow"
+                };
+                blockTypeManager.Insert(blockType);
+
+            }
+
+            if (!(context.BlockTypes.Any(bt => bt.Name == "aktivita")))
+            {
+                var blockTypeManager = new DML.DMLBlockType();
+                var blockType = new Entities.BlockType
+                {
+                    Name = "aktivita",
+                    Description = "Aktivita ze strany uživatele"
+                };
+                blockTypeManager.Insert(blockType);
+
+            }
+
+            if (!(context.BlockTypes.Any(bt => bt.Name == "soubor")))
+            {
+                var blockTypeManager = new DML.DMLBlockType();
+                var blockType = new Entities.BlockType
+                {
+                    Name = "soubor",
+                    Description = "Nahrání souboru do systému"
+                };
+                blockTypeManager.Insert(blockType);
+
+            }
+
+
+            if (!(context.BlockTypes.Any(bt => bt.Name == "konec")))
+            {
+                var blockTypeManager = new DML.DMLBlockType();
+                var blockType = new Entities.BlockType
+                {
+                    Name = "konec",
+                    Description = "Konec toku workflow"
+                };
+                blockTypeManager.Insert(blockType);
+
+            }
+
+
         }
     }
 }

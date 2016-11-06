@@ -16,7 +16,7 @@
 
                         <li>@Html.ActionLink("Akce ke schválení", "Index", "Home")</li>
                         
-                        @if (User.IsInRole("admin") || User.IsInRole("garant"))
+                        @if (User.IsInRole("Admin") || User.IsInRole("Garant"))
                         {
                             <li>@Html.ActionLink("Workflow", "Index", "ManageWorkflows")</li>
                         }

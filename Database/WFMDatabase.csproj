@@ -92,6 +92,10 @@
     <Compile Include="Migrations\201611051957197_user seed.Designer.cs">
       <DependentUpon>201611051957197_user seed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611061051258_updateSeedMethod.cs" />
+    <Compile Include="Migrations\201611061051258_updateSeedMethod.Designer.cs">
+      <DependentUpon>201611061051258_updateSeedMethod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611051957197_user seed.resx">
       <DependentUpon>201611051957197_user seed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611061051258_updateSeedMethod.resx">
+      <DependentUpon>201611061051258_updateSeedMethod.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -35,8 +35,8 @@ namespace WFManagementSystem.Controllers
         // GET: ManageWorkflows
         public ActionResult Index()
         {
-            if (User.IsInRole("admin")) ViewBag.Workflows = _workflowManager.GetAll();
-            if (User.IsInRole("garant"))
+            if (User.IsInRole("Admin")) ViewBag.Workflows = _workflowManager.GetAll();
+            if (User.IsInRole("Garant"))
             {
                 var userId = User.Identity.GetUserId();
                 ViewBag.Workflows = _workflowManager.GetAllByUser(userId);
