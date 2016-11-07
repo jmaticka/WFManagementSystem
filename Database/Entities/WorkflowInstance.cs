@@ -12,7 +12,7 @@ namespace WFMDatabase.Entities
         public DateTime DateTimeStarted { get; set; }
         public DateTime DateTimeEnded { get; set; }
         public Workflow Workflow { get; set; }
-        public IdentityUser UserStarted { get; set; }
+        public ApplicationUser UserStarted { get; set; }
 
     }
 }

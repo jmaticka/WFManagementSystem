@@ -13,7 +13,7 @@ namespace WFMDatabase.Entities
         public DateTime DateTimeEnded { get; set; }
         public virtual Block Block { get; set; }
         public virtual WorkflowInstance WorkflowInstance { get; set; }
-        public IdentityUser Worker { get; set; }
+        public ApplicationUser Worker { get; set; }
 
     }
 }

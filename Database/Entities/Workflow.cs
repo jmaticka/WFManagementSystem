@@ -14,6 +14,6 @@ namespace WFMDatabase.Entities
         public int NumberOfBlocks { get; set; }
         public bool IsActual { get; set; }
         public DateTime DateTimeCreated { get; set; }
-        public IdentityUser UserCreated { get; set; }
+        public ApplicationUser UserCreated { get; set; }
     }
 }

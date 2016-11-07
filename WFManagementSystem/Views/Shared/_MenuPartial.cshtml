@@ -20,6 +20,10 @@
                         {
                             <li>@Html.ActionLink("Workflow", "Index", "ManageWorkflows")</li>
                         }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Správa uživatelů", "Index", "ManageUsers")</li>
+                        }
                         
                     </ul>
                 }

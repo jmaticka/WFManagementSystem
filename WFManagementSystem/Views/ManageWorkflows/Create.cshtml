@@ -33,27 +33,27 @@
             <div class="col-lg-6">
                 <label class="control-label">Název bloku</label>
                 <div>
-                    <span class="form-control">block.name</span>
+                    <span class="form-control">{{block.name}}</span>
                 </div>
             </div>
 
             <div class="col-lg-6">
                 <label class="control-label">Popis bloku</label>
                 <div>
-                    <span class="form-control">block.description</span>
+                    <span class="form-control">{{block.description}}</span>
                 </div>
             </div>
 
             <div class="col-lg-6">
                 <label class="control-label">Výchozí uživatel</label>
                 <div>
-                    <span class="form-control">block.worker.name</span>
+                    <span class="form-control">{{block.worker.name}}</span>
                 </div>
             </div>
             <div class="col-lg-6">
                 <label class="control-label">Typ bloku</label>
                 <div>
-                    <span class="form-control">block.blockType.name</span>
+                    <span class="form-control">{{block.blockType.name}}</span>
                 </div>
             </div>
 
@@ -117,9 +117,8 @@
             <input class="btn btn-success form-control" type="submit" value="ulož" />
         </div>
         <div class="col-lg-6">
-            <span class="btn btn-danger form-control">
-                <strong>@Html.ActionLink("zrušit", "Index")</strong>
-            </span>
+                <strong>@Html.ActionLink("zrušit", "Index", "ManageWorkflows" ,htmlAttributes: new { @class = "btn btn-danger form-control" })</strong>
+           
         </div>
 
     </div>

@@ -72,29 +72,9 @@
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\Workflow.cs" />
     <Compile Include="Entities\WorkflowInstance.cs" />
-    <Compile Include="Migrations\201610171156598_InitialCreate.cs" />
-    <Compile Include="Migrations\201610171156598_InitialCreate.Designer.cs">
-      <DependentUpon>201610171156598_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611011525440_BlockType.cs" />
-    <Compile Include="Migrations\201611011525440_BlockType.Designer.cs">
-      <DependentUpon>201611011525440_BlockType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611051943192_some changes.cs" />
-    <Compile Include="Migrations\201611051943192_some changes.Designer.cs">
-      <DependentUpon>201611051943192_some changes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611051949384_roles seed.cs" />
-    <Compile Include="Migrations\201611051949384_roles seed.Designer.cs">
-      <DependentUpon>201611051949384_roles seed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611051957197_user seed.cs" />
-    <Compile Include="Migrations\201611051957197_user seed.Designer.cs">
-      <DependentUpon>201611051957197_user seed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611061051258_updateSeedMethod.cs" />
-    <Compile Include="Migrations\201611061051258_updateSeedMethod.Designer.cs">
-      <DependentUpon>201611061051258_updateSeedMethod.cs</DependentUpon>
+    <Compile Include="Migrations\201611071051306_finalFox.cs" />
+    <Compile Include="Migrations\201611071051306_finalFox.Designer.cs">
+      <DependentUpon>201611071051306_finalFox.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,23 +86,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610171156598_InitialCreate.resx">
-      <DependentUpon>201610171156598_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611011525440_BlockType.resx">
-      <DependentUpon>201611011525440_BlockType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611051943192_some changes.resx">
-      <DependentUpon>201611051943192_some changes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611051949384_roles seed.resx">
-      <DependentUpon>201611051949384_roles seed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611051957197_user seed.resx">
-      <DependentUpon>201611051957197_user seed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611061051258_updateSeedMethod.resx">
-      <DependentUpon>201611061051258_updateSeedMethod.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611071051306_finalFox.resx">
+      <DependentUpon>201611071051306_finalFox.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,7 +13,6 @@ namespace WFMDatabase.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WFMDatabase.DBContextWFManagementSystem";
         }
 
         protected override void Seed(WFMDatabase.DBContextWFManagementSystem context)
@@ -124,6 +123,7 @@ namespace WFMDatabase.Migrations
             }
 
 
-        }
+       
+     }
     }
 }

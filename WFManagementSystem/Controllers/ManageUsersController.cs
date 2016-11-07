@@ -14,6 +14,7 @@ using static WFManagementSystem.Controllers.ManageController;
 
 namespace WFManagementSystem.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManageUsersController : Controller
     {
         public ApplicationUserManager UserManager

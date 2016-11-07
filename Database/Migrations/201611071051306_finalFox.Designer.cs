@@ -7,13 +7,13 @@ namespace WFMDatabase.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class somechanges : IMigrationMetadata
+    public sealed partial class finalFox : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(somechanges));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(finalFox));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611051943192_some changes"; }
+            get { return "201611071051306_finalFox"; }
         }
         
         string IMigrationMetadata.Source
