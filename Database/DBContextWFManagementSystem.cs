@@ -23,7 +23,7 @@ namespace WFMDatabase
         {
             base.OnModelCreating(modelBuilder);
             var user = modelBuilder.Entity<ApplicationUser>()
-                .ToTable("AspNetUsers");
+                .ToTable("IdentityUsers");
             user.HasMany(u => u.Roles).WithRequired().HasForeignKey(ur => ur.UserId);
             user.HasMany(u => u.Claims).WithRequired().HasForeignKey(uc => uc.UserId);
             user.HasMany(u => u.Logins).WithRequired().HasForeignKey(ul => ul.UserId);

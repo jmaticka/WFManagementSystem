@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201611071051306_finalFox.Designer.cs">
       <DependentUpon>201611071051306_finalFox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611071236548_fixesIdentityUsers.cs" />
+    <Compile Include="Migrations\201611071236548_fixesIdentityUsers.Designer.cs">
+      <DependentUpon>201611071236548_fixesIdentityUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +92,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611071051306_finalFox.resx">
       <DependentUpon>201611071051306_finalFox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611071236548_fixesIdentityUsers.resx">
+      <DependentUpon>201611071236548_fixesIdentityUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

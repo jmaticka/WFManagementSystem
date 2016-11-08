@@ -46,11 +46,11 @@ namespace WFManagementSystem.Controllers
 
         public ActionResult Create()
         {
-            var users = UserManager.Users.Select(x => new {x.Id, x.UserName}).ToList();
-            var res = new SelectList(users, "Id", "UserName");
+            var users = UserManager.Users.ToList();
+            var res = users;
             ViewBag.Users = res;
 
-            ViewBag.BlockTypes = new SelectList(_blockTypeManager.GetAll(), "ID", "Name");
+            ViewBag.BlockTypes = _blockTypeManager.GetAll();
             return View();
         }
 

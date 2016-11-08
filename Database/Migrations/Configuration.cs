@@ -109,6 +109,42 @@ namespace WFMDatabase.Migrations
 
             }
 
+            if (!(context.BlockTypes.Any(bt => bt.Name == "rozdìlení")))
+            {
+                var blockTypeManager = new DML.DMLBlockType();
+                var blockType = new Entities.BlockType
+                {
+                    Name = "rozdìlení",
+                    Description = "Rozdìlení workflow do více vláken"
+                };
+                blockTypeManager.Insert(blockType);
+
+            }
+
+            if (!(context.BlockTypes.Any(bt => bt.Name == "podmínka")))
+            {
+                var blockTypeManager = new DML.DMLBlockType();
+                var blockType = new Entities.BlockType
+                {
+                    Name = "podmínka",
+                    Description = "Smìr dalšího procesu"
+                };
+                blockTypeManager.Insert(blockType);
+            }
+
+
+            if (!(context.BlockTypes.Any(bt => bt.Name == "slouèení")))
+            {
+                var blockTypeManager = new DML.DMLBlockType();
+                var blockType = new Entities.BlockType
+                {
+                    Name = "slouèení",
+                    Description = "Slouèení workflow z více vláken"
+                };
+                blockTypeManager.Insert(blockType);
+
+            }
+
 
             if (!(context.BlockTypes.Any(bt => bt.Name == "konec")))
             {
@@ -123,7 +159,7 @@ namespace WFMDatabase.Migrations
             }
 
 
-       
-     }
+
+        }
     }
 }

@@ -1,10 +1,11 @@
 ﻿@using WFManagementSystem.ViewModels
+@using WFMDatabase.Entities
 @model ManageWorkflowsViewModel
 
 @{
     ViewBag.Title = "Tvorba workflow";
-    SelectList BlockTypes = (SelectList)ViewBag.BlockTypes;
-    SelectList Users = (SelectList)ViewBag.Users;
+    List<BlockType> BlockTypes = ViewBag.BlockTypes;
+    List<ApplicationUser> Users = ViewBag.Users;
 
 
 }
@@ -83,9 +84,10 @@
                 <label for="worker" class="control-label">Výchozí uživatel</label>
                 <div>
                     <select class="form-control" id="worker" name="worker" ng-model="vm.newBlock.worker">
+                        <option></option>
                         @foreach (var user in Users)
                         {
-                            <option name="@user.Text" id="@user.Value">@user.Text</option>
+                            <option>@user.UserName</option>
                         }
                     </select>
                 </div>
@@ -93,11 +95,11 @@
             <div class="col-lg-6">
                 <label for="blockType" class="control-label">Typ bloku</label>
                 <div>
-                    <select class="form-control" id="blockType" name="blockType" ng-model="vm.newBlock.blockType">
-                        @foreach (var blockType in BlockTypes)
-                        {
-                            <option name="@blockType.Text" id="@blockType.Value">@blockType.Text</option>
-                        }
+                    <select class="form-control" id="blockType" name="blockType" ng-init="vm.initStart()" ng-model="vm.newBlock.blockType" ng-options="blockType.ID as blockType.Name for blockType in JSON.parse('@Html.Raw(BlockTypes)')">
+                        @*@foreach (var blockType in BlockTypes)
+                            {
+                                <option>@blockType.Name</option>
+                            }*@
                     </select>
                 </div>
             </div>
@@ -117,8 +119,8 @@
             <input class="btn btn-success form-control" type="submit" value="ulož" />
         </div>
         <div class="col-lg-6">
-                <strong>@Html.ActionLink("zrušit", "Index", "ManageWorkflows" ,htmlAttributes: new { @class = "btn btn-danger form-control" })</strong>
-           
+            <strong>@Html.ActionLink("zrušit", "Index", "ManageWorkflows", htmlAttributes: new { @class = "btn btn-danger form-control" })</strong>
+
         </div>
 
     </div>
