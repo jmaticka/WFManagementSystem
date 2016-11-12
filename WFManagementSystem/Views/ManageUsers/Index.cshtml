@@ -1,0 +1,48 @@
+﻿@using WFManagementSystem.ViewModels
+@{
+    ViewBag.Title = "Správa uživatelů";
+    var users = (List<UserWithRoleNamesViewModel>)ViewBag.Users;
+}
+
+<h2>Správa uživatelů</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Jméno
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Role
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var user in users)
+    {
+        <tr>
+            <td>
+                @user.UserName
+            </td>
+            <td>
+                @user.Email
+            </td>
+            <td>
+                @foreach (var role in user.Roles)
+                {
+                    @role.Name                    
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+

@@ -1,0 +1,133 @@
+﻿@using WFManagementSystem.ViewModels
+@using WFMDatabase.Entities
+@model ManageWorkflowsViewModel
+
+@{
+    ViewBag.Title = "Tvorba workflow";
+    List<BlockType> BlockTypes = ViewBag.BlockTypes;
+    List<ApplicationUser> Users = ViewBag.Users;
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/angularWorkflow")
+}
+
+<h2 class="text-center">Tvorba Workflow</h2>
+<div ng-app="app-workflow">
+
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group first text-center">
+        @Html.LabelFor(model => model.WorkflowName, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.EditorFor(model => model.WorkflowName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.WorkflowName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <script>
+        data = {
+            workers:[
+                @foreach (var user in Users)
+                {
+                    @Html.Raw("{id:'"+user.Id+"', name:'"+user.UserName+"'},\r\n");
+                }
+            ],
+            blockTypes : [
+                @foreach (var block in BlockTypes)
+                {
+                    @Html.Raw("{id:'"+block.ID+"', name:'"+block.Description+"'},\r\n");
+                }
+            ]
+        }
+    </script>
+
+    <div ng-controller="workflowController as vm">
+        <div ng-repeat="block in vm.blocks" class="form-group row block">
+            <div class="col-lg-6">
+                <label class="control-label">Název bloku</label>
+                <div>
+                    <span class="form-control">{{block.name}}</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <label class="control-label">Popis bloku</label>
+                <div>
+                    <span class="form-control">{{block.description}}</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <label class="control-label">Výchozí uživatel</label>
+                <div>
+                    <span class="form-control">{{block.worker.name}}</span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label class="control-label">Typ bloku</label>
+                <div>
+                    <span class="form-control">{{block.blockType.name}}</span>
+                </div>
+            </div>
+        </div>
+
+        <form novalidate name="newBlockForm" class="form-group row block" ng-submit="vm.addBlock()">
+
+            <div class="col-lg-6">
+                <label for="name" class="control-label">Název bloku</label>
+                <div>
+                    <input type="text" id="name" name="name" class="form-control" ng-model="vm.newBlock.name" required ng-minlength="5" />
+                    <span ng-show="newBlockForm.name.$error.required" class="text-warning">Je třeba zadat název bloku</span>
+                    <span ng-show="newBlockForm.name.$error.minlength" class="text-warning">Název bloku musí mít minimálně 5 písmen</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <label for="description" class="control-label">Popis bloku</label>
+                <div>
+                    <input type="text" id="desciption" name="description" class="form-control" ng-model="vm.newBlock.description" />
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <label for="worker" class="control-label">Výchozí uživatel</label>
+                <div>
+                    <select class="form-control" id="worker" name="worker" ng-model="vm.newBlock.worker" ng-options="option.name for option in vm.data.workers">
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <label for="blockType" class="control-label">Typ bloku</label>
+                <div>
+                    <select class="form-control" id="blockType" name="blockType" ng-init="vm.initStart()" ng-model="vm.newBlock.blockType" ng-options="option.name for option in vm.data.blockTypes">
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-lg-offset-1">
+                <input type="submit"
+                       value="Přidat nový blok workflow" class="btn btn-primary form-control addBlock"
+                       ng-disabled="newBlockForm.$invalid" />
+            </div>
+
+        </form>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <input class="btn btn-success form-control" type="submit" value="ulož" />
+        </div>
+        <div class="col-lg-6">
+            <strong>@Html.ActionLink("zrušit", "Index", "ManageWorkflows", htmlAttributes: new { @class = "btn btn-danger form-control" })</strong>
+
+        </div>
+
+    </div>
+
+
+</div>
+

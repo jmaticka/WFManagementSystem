@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WFManagementSystem.Models;
+using WFMDatabase.Entities;
 
 namespace WFManagementSystem.Controllers
 {
@@ -153,7 +154,8 @@ namespace WFManagementSystem.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var resultAddRole = await UserManager.AddToRoleAsync(user.Id, "Uživatel");
+                if (result.Succeeded || resultAddRole.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
@@ -166,6 +168,7 @@ namespace WFManagementSystem.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
+                AddErrors(resultAddRole);
             }
 
             // If we got this far, something failed, redisplay form

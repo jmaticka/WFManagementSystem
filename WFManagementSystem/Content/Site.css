@@ -1,6 +1,4 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -16,9 +14,38 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+
+.btn a {
+    color: white;
+    text-decoration: none;
 }
+
+
+
+
+
+/* css pro spravu workflow */
+form .first {
+    margin-bottom: 3em;
+}
+
+.block {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.block .col-lg-10 .addBlock {
+    margin-top: 1em;
+}
+/* konec css pro spravu workflow */
+
+footer {
+    padding-top:1em;
+    clear: both;
+}
+

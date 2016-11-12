@@ -1,0 +1,28 @@
+﻿@using WFManagementSystem.ViewModels
+@model ProcessStepViewModel
+
+@{
+    ViewBag.Title = "PerformAction";
+    var field = (ProcessStepViewModel)ViewBag.Field;
+}
+
+<h2>@field.Name</h2>
+<p>@field.Description</p>
+<form>
+    <div class="form-group">
+        <label>Schválit?</label>
+        <div class="col-md-10">
+            <input class="form-control" type="checkbox" />
+        </div>
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="odeslat" class="btn btn-success" />
+        <span class="btn btn-danger">
+            @Html.ActionLink("zrušit", "Index")
+        </span>
+
+    </div>
+
+
+</form>

@@ -1,0 +1,63 @@
+﻿@using WFMDatabase.Entities
+@using WFManagementSystem.ViewModels
+@model ManageUsersViewModel
+@{
+    ViewBag.Title = "Edit";
+    var user = (ApplicationUser)ViewBag.User;
+    var userRoles = (SelectList)ViewBag.UserRoles;
+}
+
+<h2>Uživatel @user.UserName</h2>
+
+@using (Html.BeginForm("Edit", "ManageUsers", new { id = user.Id, oldPassword = user.PasswordHash }, FormMethod.Post, htmlAttributes: new { @class = "col-lg-6" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @Value = user.Email, @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.DropDownListFor(model => model.UserRole, userRoles, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label" })
+            <div>
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-lg-6">
+                <input class="btn btn-success form-control" type="submit" value="ulož" />
+            </div>
+            <div class="col-lg-6">
+                    <strong>@Html.ActionLink("zrušit", "Index", "ManageUsers", htmlAttributes: new { @class = "btn btn-danger form-control" } )</strong>
+                
+            </div>
+
+        </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
