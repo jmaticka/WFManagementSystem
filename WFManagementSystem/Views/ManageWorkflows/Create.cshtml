@@ -38,7 +38,7 @@
             blockTypes : [
                 @foreach (var block in BlockTypes)
                 {
-                    @Html.Raw("{id:'"+block.ID+"', name:'"+block.Description+"'},\r\n");
+                    @Html.Raw("{id:'"+block.ID+"', name:'"+block.Name+"'},\r\n");
                 }
             ]
         }
