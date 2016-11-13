@@ -6,8 +6,6 @@
     ViewBag.Title = "Tvorba workflow";
     List<BlockType> BlockTypes = ViewBag.BlockTypes;
     List<ApplicationUser> Users = ViewBag.Users;
-
-
 }
 
 @section Scripts {
@@ -28,6 +26,23 @@
             @Html.ValidationMessageFor(model => model.WorkflowName, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <script>
+        data = {
+            workers:[
+                @foreach (var user in Users)
+                {
+                    @Html.Raw("{id:'"+user.Id+"', name:'"+user.UserName+"'},\r\n");
+                }
+            ],
+            blockTypes : [
+                @foreach (var block in BlockTypes)
+                {
+                    @Html.Raw("{id:'"+block.ID+"', name:'"+block.Description+"'},\r\n");
+                }
+            ]
+        }
+    </script>
 
     <div ng-controller="workflowController as vm">
         <div ng-repeat="block in vm.blocks" class="form-group row block">
@@ -57,10 +72,7 @@
                     <span class="form-control">{{block.blockType.name}}</span>
                 </div>
             </div>
-
-
         </div>
-
 
         <form novalidate name="newBlockForm" class="form-group row block" ng-submit="vm.addBlock()">
 
@@ -83,23 +95,14 @@
             <div class="col-lg-6">
                 <label for="worker" class="control-label">Výchozí uživatel</label>
                 <div>
-                    <select class="form-control" id="worker" name="worker" ng-model="vm.newBlock.worker">
-                        <option></option>
-                        @foreach (var user in Users)
-                        {
-                            <option>@user.UserName</option>
-                        }
+                    <select class="form-control" id="worker" name="worker" ng-model="vm.newBlock.worker" ng-options="option.name for option in vm.data.workers">
                     </select>
                 </div>
             </div>
             <div class="col-lg-6">
                 <label for="blockType" class="control-label">Typ bloku</label>
                 <div>
-                    <select class="form-control" id="blockType" name="blockType" ng-init="vm.initStart()" ng-model="vm.newBlock.blockType" ng-options="blockType.ID as blockType.Name for blockType in JSON.parse('@Html.Raw(BlockTypes)')">
-                        @*@foreach (var blockType in BlockTypes)
-                            {
-                                <option>@blockType.Name</option>
-                            }*@
+                    <select class="form-control" id="blockType" name="blockType" ng-init="vm.initStart()" ng-model="vm.newBlock.blockType" ng-options="option.name for option in vm.data.blockTypes">
                     </select>
                 </div>
             </div>
