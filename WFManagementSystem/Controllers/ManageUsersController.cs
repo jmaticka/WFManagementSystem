@@ -47,7 +47,6 @@ namespace WFManagementSystem.Controllers
 
         // GET: ManageUsers
         public ActionResult Index()
-
         {
             var users = new List<UserWithRoleNamesViewModel>();
             foreach (var user in UserManager.Users.ToList())
@@ -171,13 +170,21 @@ namespace WFManagementSystem.Controllers
         }
 
 
+        public async System.Threading.Tasks.Task<ActionResult> Delete(string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            ViewBag.User = user;
+            return View();
+        }
+
         // POST: ManageUsers/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                var user = UserManager.FindById(id);
+                var result = UserManager.Delete(user);
 
                 return RedirectToAction("Index");
             }

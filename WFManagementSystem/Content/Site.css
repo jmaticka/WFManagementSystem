@@ -36,16 +36,41 @@ form .first {
     margin-left: 0.25em;
     margin-right: 0.25em;
     border: 2px solid black;
-    border-radius: 5px;
 }
 
-.block .col-lg-10 .addBlock {
+.formBlock {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border: 2px solid black;
+}
+
+
+.col-lg-10 .addBlock {
     margin-top: 1em;
 }
+
+.paddingZero {
+    padding: 0 !important;
+}
+
+div div .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.clear {
+    clear: both !important;
+}
+
+.hide {
+    display: none;
+}
+
+
+
 /* konec css pro spravu workflow */
 
 footer {
-    padding-top:1em;
+    padding-top: 1em;
     clear: both;
 }
-

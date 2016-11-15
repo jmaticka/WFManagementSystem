@@ -55,10 +55,10 @@ namespace WFManagementSystem.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Heslo")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Zapamatovat si?")]
         public bool RememberMe { get; set; }
     }
 
@@ -70,14 +70,14 @@ namespace WFManagementSystem.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} musí být alespoň {2} dlouhé.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Heslo")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Potvrď heslo")]
+        [Compare("Password", ErrorMessage = "Heslo se neshoduje")]
         public string ConfirmPassword { get; set; }
     }
 

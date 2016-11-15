@@ -45,75 +45,52 @@
     </script>
 
     <div ng-controller="workflowController as vm">
-        <div ng-repeat="block in vm.blocks" class="form-group row block">
-            <div class="col-lg-6">
-                <label class="control-label">Název bloku</label>
-                <div>
-                    <span class="form-control">{{block.name}}</span>
-                </div>
-            </div>
+        <htmldiv content="vm.htmlCode"></htmldiv> 
+        
 
-            <div class="col-lg-6">
-                <label class="control-label">Popis bloku</label>
-                <div>
-                    <span class="form-control">{{block.description}}</span>
-                </div>
-            </div>
+        <div class="form-group row clear" id="control">
+            <form novalidate name="{{parallel.name}}" id="{{parallel.name}}" ng-repeat="parallel in vm.parallels" class="col-lg-{{12/vm.parallels.length}} formBlock row">
 
-            <div class="col-lg-6">
-                <label class="control-label">Výchozí uživatel</label>
-                <div>
-                    <span class="form-control">{{block.worker.name}}</span>
+                <div class="col-lg-6">
+                    <label for="name" class="control-label">Název bloku</label>
+                    <div>
+                        <input type="text" id="name" name="name" class="form-control" ng-model="parallel.newBlock.name" required ng-minlength="5" />
+                        <span ng-show="{{parallel.name}}.name.$error.required" class="text-warning">Je třeba zadat název bloku</span>
+                        <span ng-show="{{parallel.name}}.name.$error.minlength" class="text-warning">Název bloku musí mít minimálně 5 písmen</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <label class="control-label">Typ bloku</label>
-                <div>
-                    <span class="form-control">{{block.blockType.name}}</span>
+
+                <div class="col-lg-6">
+                    <label for="description" class="control-label">Popis bloku</label>
+                    <div>
+                        <input type="text" id="desciption" name="description" class="form-control" ng-model="parallel.newBlock.description" />
+                    </div>
                 </div>
-            </div>
+
+                <div class="col-lg-6">
+                    <label for="worker" class="control-label">Výchozí uživatel</label>
+                    <div>
+                        <select class="form-control" id="worker" name="worker" ng-model="parallel.newBlock.worker" ng-options="option.name for option in vm.data.workers"></select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label for="blockType" class="control-label">Typ bloku</label>
+                    <div>
+                        <select class="form-control" id="blockType" name="blockType" ng-init="vm.initStart(parallel)" ng-model="parallel.newBlock.blockType" ng-options="option.name for option in vm.data.blockTypes"></select>
+                    </div>
+                </div>
+
+                <div class="col-lg-10 col-lg-offset-1">
+                    <button ng-click="vm.addBlock(parallel)"
+                            ng-disabled="{{parallel.name}}.$invalid"
+                            class="btn btn-primary form-control addBlock">
+                        Přidat nový blok workflow
+                    </button>
+
+                </div>
+
+            </form>
         </div>
-
-        <form novalidate name="newBlockForm" class="form-group row block" ng-submit="vm.addBlock()">
-
-            <div class="col-lg-6">
-                <label for="name" class="control-label">Název bloku</label>
-                <div>
-                    <input type="text" id="name" name="name" class="form-control" ng-model="vm.newBlock.name" required ng-minlength="5" />
-                    <span ng-show="newBlockForm.name.$error.required" class="text-warning">Je třeba zadat název bloku</span>
-                    <span ng-show="newBlockForm.name.$error.minlength" class="text-warning">Název bloku musí mít minimálně 5 písmen</span>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <label for="description" class="control-label">Popis bloku</label>
-                <div>
-                    <input type="text" id="desciption" name="description" class="form-control" ng-model="vm.newBlock.description" />
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <label for="worker" class="control-label">Výchozí uživatel</label>
-                <div>
-                    <select class="form-control" id="worker" name="worker" ng-model="vm.newBlock.worker" ng-options="option.name for option in vm.data.workers">
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <label for="blockType" class="control-label">Typ bloku</label>
-                <div>
-                    <select class="form-control" id="blockType" name="blockType" ng-init="vm.initStart()" ng-model="vm.newBlock.blockType" ng-options="option.name for option in vm.data.blockTypes">
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-lg-10 col-lg-offset-1">
-                <input type="submit"
-                       value="Přidat nový blok workflow" class="btn btn-primary form-control addBlock"
-                       ng-disabled="newBlockForm.$invalid" />
-            </div>
-
-        </form>
     </div>
 
 

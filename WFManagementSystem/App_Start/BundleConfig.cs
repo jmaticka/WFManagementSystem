@@ -25,6 +25,7 @@ namespace WFManagementSystem
 
             bundles.Add(new ScriptBundle("~/bundles/angularWorkflow").Include(
                       "~/Scripts/angular.min.js",
+                      "~/Scripts/angular-sanitize.min.js",
                       "~/Scripts/AppAngular/app-workflow.js",
                        "~/Scripts/AppAngular/workflowController.js"));
 

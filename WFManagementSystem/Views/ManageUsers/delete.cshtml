@@ -1,0 +1,32 @@
+﻿@using WFMDatabase.Entities
+
+
+@{
+    ViewBag.Title = "Smazat";
+    ApplicationUser user = (ApplicationUser)ViewBag.User;
+}
+
+<h2>Smazat</h2>
+
+<h3>Jste si jistý, že chcete smazat uživatele?</h3>
+<div>
+    <h4>@user.UserName</h4>
+    <hr />
+
+    @using (Html.BeginForm("Delete", "ManageUsers", new { id = user.Id}, FormMethod.Post, htmlAttributes: new { @class = "col-lg-6" }))
+    { 
+        @Html.AntiForgeryToken()
+        
+            <div class="form-group">
+                <div class="col-lg-6">
+                    <input class="btn btn-success form-control" type="submit" value="ok" />
+                </div>
+                <div class="col-lg-6">
+                    <strong>@Html.ActionLink("zrušit", "Index", "ManageUsers", htmlAttributes: new { @class = "btn btn-danger form-control" })</strong>
+
+                </div>
+
+            </div>
+
+    }
+</div>
