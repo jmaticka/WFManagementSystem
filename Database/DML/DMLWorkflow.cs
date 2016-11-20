@@ -41,7 +41,28 @@ namespace WFMDatabase.DML
                 {
                     var user = dbContext.Users.FirstOrDefault(x => x.Id == userId);
                     workflow.UserCreated = user;
-                    
+                    foreach (var workflowBlock in workflow.Blocks)
+                    {
+                        var tracked = dbContext.ChangeTracker.Entries<BlockType>().Any(e => e.Entity.ID == workflowBlock.BlockType.ID);
+                        if (!tracked)
+                            dbContext.BlockTypes.Attach(workflowBlock.BlockType);
+                        else
+                        {
+                            workflowBlock.BlockType =
+                                    dbContext.BlockTypes.FirstOrDefault(x => x.ID == workflowBlock.BlockType.ID);
+                        }
+                        foreach (var workflowBlockNextBlock in workflowBlock.NextBlocks)
+                        {
+                            var tracked2 = dbContext.ChangeTracker.Entries<BlockType>().Any(e => e.Entity.ID == workflowBlockNextBlock.BlockType.ID);
+                            if (!tracked2)
+                                dbContext.BlockTypes.Attach(workflowBlockNextBlock.BlockType);
+                            else
+                            {
+                                workflowBlockNextBlock.BlockType =
+                                    dbContext.BlockTypes.FirstOrDefault(x => x.ID == workflowBlockNextBlock.BlockType.ID);
+                            }
+                        }
+                    }
                     var res = dbContext.Workflows.Add(workflow);
                         dbContext.SaveChanges();
                     return res;

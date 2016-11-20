@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using WFMDatabase.DML;
 using WFMDatabase.Entities;
 
@@ -33,11 +34,11 @@ namespace WFManagementSystem.Controllers.api
         {
             workflow.DateTimeCreated = DateTime.Now;
             workflow.IsActual = true;
-            workflow.UserCreated = await UserManager.FindByNameAsync(User.Identity.Name);
+            //workflow.UserCreated = await UserManager.FindByNameAsync(User.Identity.Name);
            
             if (ModelState.IsValid)
             {
-                var result = _dbWorklfow.Insert(workflow);
+                var result = _dbWorklfow.Insert(workflow,User.Identity.GetUserId());
                 return Created($"api/workflows/create/{workflow.Name}", workflow);
             }
             return BadRequest(ModelState);
