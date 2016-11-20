@@ -48,13 +48,15 @@ namespace WFMDatabase.DML
             }
 
         }
-        public Workflow Update(Workflow workflow)
+
+        public Workflow Update(Workflow newWorkflow)
         {
             try
             {
                 using (var dbContext = new DBContextWFManagementSystem())
                 {
-                    var res = dbContext.Workflows.Add(workflow);
+                    var temp = dbContext.Workflows.FirstOrDefault(x => x.ID == newWorkflow.ID).IsActual = false;
+                    var res = dbContext.Workflows.Add(newWorkflow);
                     dbContext.SaveChanges();
                     return res;
                 }
@@ -64,6 +66,8 @@ namespace WFMDatabase.DML
                 throw new Exception("Problem upravit workflow: {0}", e);
             }
         }
+
+        
         public Workflow Delete(Workflow workflow)
         {
             try

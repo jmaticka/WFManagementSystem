@@ -193,8 +193,25 @@
         };
 
         vm.saveWorkflow = function () {
+            $http.post("/api/workflows/create", vm.newWorkflow)
+                .then(function() {
+                    //success
+                        vm.newWorkflow = {};
+                    },
+                    function() {
+                    //failure
+                    });
 
-
+        };
+        vm.updateWorkflow = function() {
+            $http.post("/api/workflows/update", vm.newWorkflow)
+                .then(function() {
+                        //success
+                        vm.newWorkflow = {};
+                    },
+                    function() {
+                        //failure
+                    });
         };
 
         function addParallelDivs(val) {

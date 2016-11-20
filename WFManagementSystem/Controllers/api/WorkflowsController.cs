@@ -11,15 +11,30 @@ namespace WFManagementSystem.Controllers.api
 {
     public class WorkflowsController : ApiController
     {
-        IDMLWorkflow dbWorklfow = new DMLWorkflow();
+        IDMLWorkflow _dbWorklfow = new DMLWorkflow();
 
         // POST api/<controller>
         [Route("api/workflows/create")]
-        public IHttpActionResult Create([FromBody]Workflow value)
+        public IHttpActionResult Create([FromBody]Workflow workflow)
         {
-
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                var reuslt =_dbWorklfow.Insert(workflow);
+                return Created($"api/workflows/create/{workflow.Name}",workflow);
+            }
+            return BadRequest(ModelState);
         }
 
+        [Route("api/workflows/update")]
+        public IHttpActionResult Update([FromBody] Workflow workflow)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _dbWorklfow.Update(workflow);
+                return Created($"api/workflows/update/{workflow.Name}", workflow);
+            }
+            return BadRequest(ModelState);
+        }
+        
     }
 }

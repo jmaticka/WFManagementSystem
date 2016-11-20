@@ -1,7 +1,7 @@
 ﻿//app-workflow
 
 (function () {
-    "use strict"
+    "use strict";
 
     //creating the Module
     angular.module("app-workflow", []);
