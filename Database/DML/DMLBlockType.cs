@@ -24,6 +24,12 @@ namespace WFMDatabase.DML
             }
         }
 
+        public BlockType GetById(int Id)
+        {
+            var res = GetAll().FirstOrDefault(x => x.ID == Id);
+            return res;
+        }
+
         public BlockType Insert(BlockType blockType)
         {
             try

@@ -3,7 +3,7 @@
 
     // Getting existing module
     angular.module("app-workflow", [])
-        .controller("workflowController", ['$scope', workflowController])
+        .controller("workflowController", ['$scope','$http', workflowController])
         .directive("htmldiv", function ($compile, $parse) {
             return {
                 restrict: 'E',
@@ -18,7 +18,7 @@
             }
         });
 
-    function workflowController($scope) {
+    function workflowController($scope, $http) {
         var vm = this;
 
         
@@ -193,6 +193,8 @@
         };
 
         vm.saveWorkflow = function () {
+            vm.newWorkflow.blocks = vm.blocks;
+
             $http.post("/api/workflows/create", vm.newWorkflow)
                 .then(function() {
                     //success

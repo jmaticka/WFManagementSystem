@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBContextWFManagementSystem.cs" />
+    <Compile Include="DML\DMLBlock.cs" />
     <Compile Include="DML\DMLBlockType.cs" />
     <Compile Include="DML\DMLWorkflow.cs" />
     <Compile Include="DML\IDMLBlock.cs" />
@@ -80,6 +81,10 @@
     <Compile Include="Migrations\201611071236548_fixesIdentityUsers.Designer.cs">
       <DependentUpon>201611071236548_fixesIdentityUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611201717506_someEdit.cs" />
+    <Compile Include="Migrations\201611201717506_someEdit.Designer.cs">
+      <DependentUpon>201611201717506_someEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611071236548_fixesIdentityUsers.resx">
       <DependentUpon>201611071236548_fixesIdentityUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611201717506_someEdit.resx">
+      <DependentUpon>201611201717506_someEdit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

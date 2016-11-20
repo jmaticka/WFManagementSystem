@@ -37,8 +37,12 @@ namespace WFMDatabase.DML
             {
                 using (var dbContext = new DBContextWFManagementSystem())
                 {
+                    foreach (var block in workflow.Blocks)
+                    {
+                        block.BlockType = dbContext.BlockTypes.FirstOrDefault(b => b.Name == block.BlockType.Name);
+                    }
                     var res = dbContext.Workflows.Add(workflow);
-                    dbContext.SaveChanges();
+                        dbContext.SaveChanges();
                     return res;
                 }
             }

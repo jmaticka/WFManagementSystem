@@ -11,7 +11,6 @@ namespace WFMDatabase.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Value { get; set; }
         public List<Block> NextBlocks { get; set; }
         public virtual BlockType BlockType { get; set; }
         public ApplicationUser Worker { get; set; }
