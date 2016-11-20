@@ -4,3 +4,5 @@
 
 /Database/obj/Debug/WFMDatabase.csprojResolveAssemblyReference.cache
 /Database/obj/Debug/WFMDatabase.Migrations.fixesIdentityUsers.resources
+/packages
+/WFManagementSystem
