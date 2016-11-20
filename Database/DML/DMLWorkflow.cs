@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using Microsoft.AspNet.Identity;
 using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
@@ -30,17 +32,16 @@ namespace WFMDatabase.DML
             }
         }
 
-        public Workflow Insert(Workflow workflow)
+        public Workflow Insert(Workflow workflow,string userId)
         {
 
             try
             {
                 using (var dbContext = new DBContextWFManagementSystem())
                 {
-                    foreach (var block in workflow.Blocks)
-                    {
-                        block.BlockType = dbContext.BlockTypes.FirstOrDefault(b => b.Name == block.BlockType.Name);
-                    }
+                    var user = dbContext.Users.FirstOrDefault(x => x.Id == userId);
+                    workflow.UserCreated = user;
+                    
                     var res = dbContext.Workflows.Add(workflow);
                         dbContext.SaveChanges();
                     return res;
