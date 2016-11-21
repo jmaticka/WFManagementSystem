@@ -21,13 +21,14 @@
         <form novalidate name="newWorkflowForm" >
             
             <div class="form-group first text-center">
-                <label for="workflowName" class="control-label">Název bloku</label>
+                <label for="workflowName" class="control-label">Název workflow</label>
                 <div>
                     <input type="text" id="workflowName" name="workflowName"  class="form-control" ng-model="vm.newWorkflow.name"  />
                 </div>
             </div>
 
             <script>
+                editedWorkflow = null;
                 data = {
                     workers: [
                         @foreach (var user in Users)
@@ -42,6 +43,8 @@
                 }
                     ]
                 }
+
+
             </script>
 
 

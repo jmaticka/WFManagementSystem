@@ -10,5 +10,6 @@ namespace WFManagementSystem
         {
             ConfigureAuth(app);
         }
+        
     }
 }

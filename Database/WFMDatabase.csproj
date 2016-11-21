@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201611201717506_someEdit.Designer.cs">
       <DependentUpon>201611201717506_someEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611211220231_positionToBlocks.cs" />
+    <Compile Include="Migrations\201611211220231_positionToBlocks.Designer.cs">
+      <DependentUpon>201611211220231_positionToBlocks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611201717506_someEdit.resx">
       <DependentUpon>201611201717506_someEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611211220231_positionToBlocks.resx">
+      <DependentUpon>201611211220231_positionToBlocks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,7 +10,6 @@ namespace WFMDatabase
 
         public DBContextWFManagementSystem() : base("DefaultConnection", throwIfV1Schema: false)
         {
-
         }
 
         public DbSet<Workflow> Workflows { get; set; }

@@ -30,30 +30,64 @@ namespace WFManagementSystem.Controllers.api
 
         // POST api/<controller>
         [Route("api/workflows/create")]
-        public async Task<IHttpActionResult> Create([FromBody]Workflow workflow)
+        public HttpResponseMessage Create([FromBody]Workflow workflow)
         {
             workflow.DateTimeCreated = DateTime.Now;
             workflow.IsActual = true;
             //workflow.UserCreated = await UserManager.FindByNameAsync(User.Identity.Name);
-           
+
             if (ModelState.IsValid)
             {
-                var result = _dbWorklfow.Insert(workflow,User.Identity.GetUserId());
-                return Created($"api/workflows/create/{workflow.Name}", workflow);
+                var result = _dbWorklfow.Insert(workflow, User.Identity.GetUserId());
+                var newUrl = this.Url.Link("Default", new
+                {
+                    Controller = "ManageWorkflows",
+                    Action = "Index"
+                });
+                return Request.CreateResponse(HttpStatusCode.OK,
+                                                          new { Success = true, RedirectUrl = newUrl });
             }
-            return BadRequest(ModelState);
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
-        [Route("api/workflows/update")]
-        public IHttpActionResult Update([FromBody] Workflow workflow)
+        [HttpPost, Route("api/workflows/get")]
+        public IHttpActionResult Get([FromBody]int id)
         {
+            var result = _dbWorklfow.GetById(id).Blocks.OrderByDescending(x => x.ID).ToList();
+            result.RemoveAt(result.Count-1);
+            result.Last().NextBlocks = new List<Block>();
+            return Ok(result);
+        }
+
+
+
+
+        [Route("api/workflows/update")]
+        public HttpResponseMessage Update([FromBody] Params postParams)
+        {
+            postParams.Workflow.DateTimeCreated = DateTime.Now;
+            postParams.Workflow.IsActual = true;
+
             if (ModelState.IsValid)
             {
-                var result = _dbWorklfow.Update(workflow);
-                return Created($"api/workflows/update/{workflow.Name}", workflow);
+                var result = _dbWorklfow.Update(postParams.Workflow, postParams.Id, User.Identity.GetUserId());
+                var newUrl = this.Url.Link("Default", new
+                {
+                    Controller = "ManageWorkflows",
+                    Action = "Index"
+                });
+                return Request.CreateResponse(HttpStatusCode.OK,
+                                                          new { Success = true, RedirectUrl = newUrl });
             }
-            return BadRequest(ModelState);
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
+
+    }
+
+    public class Params
+    {
+        public Workflow Workflow { get; set; }
+        public int Id { get; set; }
 
     }
 }

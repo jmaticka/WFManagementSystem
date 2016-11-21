@@ -54,6 +54,17 @@ namespace WFManagementSystem.Controllers
             return View();
         }
 
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Users = UserManager.Users.ToList();
+            ViewBag.BlockTypes = _blockTypeManager.GetAll();
+            ViewBag.Workflow = _workflowManager.GetById(id);
+
+
+            return View();
+        }
+
+
 
         
     }

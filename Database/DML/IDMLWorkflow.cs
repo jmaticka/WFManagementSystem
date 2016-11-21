@@ -9,8 +9,9 @@ namespace WFMDatabase.DML
     {
         List<Workflow> GetAll();
         List<Workflow> GetAllByUser(string userId);
+        Workflow GetById(int id);
         Workflow Insert(Workflow workflow, string userId);
-        Workflow Update(Workflow newWorkflow);
+        Workflow Update(Workflow newWorkflow, int oldWorkflowId, string userId);
         Workflow Delete(Workflow workflow);
 
     }

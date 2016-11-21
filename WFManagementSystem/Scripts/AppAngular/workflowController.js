@@ -3,7 +3,7 @@
 
     // Getting existing module
     angular.module("app-workflow", [])
-        .controller("workflowController", ['$scope','$http', workflowController])
+        .controller("workflowController", ['$window', '$scope', '$http', workflowController])
         .directive("htmldiv", function ($compile, $parse) {
             return {
                 restrict: 'E',
@@ -18,18 +18,21 @@
             }
         });
 
-    function workflowController($scope, $http) {
+    function workflowController($window, $scope, $http) {
         var vm = this;
 
-        
+
 
 
         vm.blocks = [];
         vm.normalBlocks = [];
         vm.paralellBlocks = [];
         vm.lastParallelType = "";
+        vm.blockId = 0;
 
         vm.newWorkflow = {};
+        vm.newWorkflow.name = editedWorkflow ? editedWorkflow.name : null;
+        vm.oldWorkflowId = editedWorkflow ? parseInt(editedWorkflow.id) : null;
         vm.data = data;
         vm.parallels = [{
             name: "addBlockFormLeft",
@@ -58,6 +61,104 @@
         };
 
 
+        vm.initEditWorkflow = function () {
+            if (vm.oldWorkflowId) {
+                $http.post("/api/workflows/get", vm.oldWorkflowId)
+                    .then(function (response) {
+                        //success
+                        for (var j = 0; j < response.data.length; j++) {
+                            var oldId = response.data[j].id;
+                            response.data[j].id = ++vm.blockId;
+
+                            for (var k = 0; k < response.data.length; k++) {
+                                if (response.data[k].nextBlocks && response.data[k].nextBlocks.length > 0) {
+                                    for (var l = 0; l < response.data[k].nextBlocks.length; l++) {
+                                        if (response.data[k].nextBlocks[l].id == oldId) {
+                                            response.data[k].nextBlocks[l].id = vm.blockId;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                        angular.copy(response.data, vm.blocks);
+                        for (var i = 0; i < vm.blocks.length; i++) {
+                            if (vm.blocks[i].blockType.name == "sloučení") {
+                                vm.isParallel = false;
+                                vm.changed = true;
+                                //var index = findIndex("sloučení", vm.data.blockTypes);
+                                //vm.data.blockTypes.splice(index, 2, { id: index, name: "rozhodnutí" }, { id: index, name: "rozdělení" });
+
+                            }
+
+                            if (!vm.isParallel) {
+                                if (vm.changed) {
+                                    vm.changed = false;
+                                    vm.htmlCode += addNormalDiv(vm.normalNum);
+                                    vm.normalBlocks.push([]);
+                                    vm.normalNum++;
+                                }
+                                vm.normalBlocks[vm.normalNum - 1].push(vm.blocks[i]);
+
+
+                            }
+
+                            if (vm.isParallel) {
+                                if (vm.changed) {
+                                    vm.changed = false;
+                                    vm.htmlCode += addParallelDivs(vm.parallelNum);
+                                    vm.paralellBlocks.push([]);
+                                    vm.paralellBlocks[vm.parallelNum].push([], []);
+                                    vm.parallelNum++;
+                                }
+                                if (vm.blocks[i].position == "left") {
+                                    vm.paralellBlocks[vm.parallelNum - 1][0].push(vm.blocks[i]);
+                                }
+
+                                if (vm.blocks[i].position == "right") {
+                                    vm.paralellBlocks[vm.parallelNum - 1][1].push(vm.blocks[i]);
+                                }
+
+                            }
+
+                            if (vm.blocks[i].blockType.name == "rozdělení" || vm.blocks[i].blockType.name == "rozhodnutí") {
+                                vm.addParallel();
+                                vm.isParallel = true;
+                                vm.changed = true;
+                                if (vm.blocks[i].blockType.name == "rozdělení") {
+                                    vm.lastParallelType = "rozdělení";
+
+                                }
+                                if (vm.blocks[i].blockType.name == "rozhodnutí") {
+                                    vm.lastParallelType = "rozhodnutí";
+
+                                }
+                                //var index = findIndex("rozdělení", vm.data.blockTypes);
+                                //vm.data.blockTypes.splice(index, 1, { id: index, name: "sloučení" });
+                                //index = findIndex("rozhodnutí", vm.data.blockTypes);
+                                //vm.data.blockTypes.splice(index, 1);
+                            }
+
+
+                            if (vm.parallels.length > 1 && !vm.isParallel) {
+                                vm.parallels = [{
+                                    name: "addBlockFormLeft",
+                                    newBlock: {}
+                                }];
+                            }
+
+
+
+                        }
+                    },
+            function () {
+                //failure
+            });
+
+            }
+        }
+
+
 
         vm.initStart = function (parallel) {
             if (vm.blocks.length < 1) {
@@ -82,15 +183,15 @@
             if (parallel.newBlock.blockType.name == "sloučení") {
                 vm.isParallel = false;
                 vm.changed = true;
-                var index = findIndex("sloučení", vm.data.blockTypes);
-                vm.data.blockTypes.splice(index, 2, { id: index, name: "rozhodnutí" }, { id: index, name: "rozdělení" });
-                
-                if(vm.paralellBlocks[vm.parallelNum - 1][0][vm.paralellBlocks[vm.parallelNum - 1][0].length - 1]
-                    .nextBlocks.length == 0){
+                //var index = findIndex("sloučení", vm.data.blockTypes);
+                //vm.data.blockTypes.splice(index, 2, { id: index, name: "rozhodnutí" }, { id: index, name: "rozdělení" });
+
+                if (vm.paralellBlocks[vm.parallelNum - 1][0][vm.paralellBlocks[vm.parallelNum - 1][0].length - 1]
+                    .nextBlocks.length == 0) {
                     vm.paralellBlocks[vm.parallelNum - 1][0][vm.paralellBlocks[vm.parallelNum - 1][0].length - 1]
                          .nextBlocks.push(blockToAdd);
                 }
-                if(vm.paralellBlocks[vm.parallelNum - 1][1][vm.paralellBlocks[vm.parallelNum - 1][1].length - 1]
+                if (vm.paralellBlocks[vm.parallelNum - 1][1][vm.paralellBlocks[vm.parallelNum - 1][1].length - 1]
                     .nextBlocks.length == 0) {
                     vm.paralellBlocks[vm.parallelNum - 1][1][vm.paralellBlocks[vm.parallelNum - 1][1].length - 1]
                          .nextBlocks.push(blockToAdd);
@@ -116,13 +217,13 @@
                     vm.changed = false;
                     vm.htmlCode += addParallelDivs(vm.parallelNum);
                     vm.paralellBlocks.push([]);
-                    vm.paralellBlocks[vm.parallelNum].push([],[]);
+                    vm.paralellBlocks[vm.parallelNum].push([], []);
                     vm.parallelNum++;
                 }
-                if(parallel.name == "addBlockFormLeft"){
+                if (parallel.name == "addBlockFormLeft") {
                     blockToAdd.position = "left";
                     if (vm.paralellBlocks[vm.parallelNum - 1][0].length == 0) {
-                        vm.blocks[vm.blocks.length - vm.paralellBlocks[vm.normalNum - 1][1].length-1]
+                        vm.blocks[vm.blocks.length - vm.paralellBlocks[vm.normalNum - 1][1].length - 1]
                         .nextBlocks.push(blockToAdd);
                     }
                     else {
@@ -135,7 +236,7 @@
                 if (parallel.name == "addBlockFormRight") {
                     blockToAdd.position = "right";
                     if (vm.paralellBlocks[vm.parallelNum - 1][1].length == 0) {
-                        vm.blocks[vm.blocks.length - vm.paralellBlocks[vm.parallelNum - 1][0].length-1]
+                        vm.blocks[vm.blocks.length - vm.paralellBlocks[vm.parallelNum - 1][0].length - 1]
                         .nextBlocks.push(blockToAdd);
                     }
                     else {
@@ -153,16 +254,16 @@
                 vm.changed = true;
                 if (parallel.newBlock.blockType.name == "rozdělení") {
                     vm.lastParallelType = "rozdělení";
-                    
+
                 }
                 if (parallel.newBlock.blockType.name == "rozhodnutí") {
                     vm.lastParallelType = "rozhodnutí";
-                    
+
                 }
-                var index = findIndex("rozdělení", vm.data.blockTypes);
-                vm.data.blockTypes.splice(index, 1, { id: index, name: "sloučení" });
-                index = findIndex("rozhodnutí", vm.data.blockTypes);
-                vm.data.blockTypes.splice(index, 1);
+                //var index = findIndex("rozdělení", vm.data.blockTypes);
+                //vm.data.blockTypes.splice(index, 1, { id: index, name: "sloučení" });
+                //index = findIndex("rozhodnutí", vm.data.blockTypes);
+                //vm.data.blockTypes.splice(index, 1);
             }
 
 
@@ -178,12 +279,12 @@
 
             if (parallel.newBlock.blockType.name == "start") {
                 vm.data.blockTypes.splice(0, 1);
-                var index = findIndex("sloučení", vm.data.blockTypes);
-                vm.data.blockTypes.splice(index, 1);
+                //var index = findIndex("sloučení", vm.data.blockTypes);
+                //vm.data.blockTypes.splice(index, 1);
             }
 
             if (parallel.newBlock.blockType.name == "konec") angular.element('#control').addClass('hide');
-                 
+
 
             //enable user and block type selections
             angular.element('#blockType').attr('disabled', false);
@@ -196,29 +297,35 @@
             vm.newWorkflow.blocks = vm.blocks;
 
             $http.post("/api/workflows/create", vm.newWorkflow)
-                .then(function() {
+                .then(function () {
                     //success
-                        vm.newWorkflow = {};
-                    },
-                    function() {
-                    //failure
+                    vm.newWorkflow = {};
+                    $window.location.href = '/ManageWorkflows';
+                },
+                    function () {
+                        //failure
                     });
 
         };
-        vm.updateWorkflow = function() {
-            $http.post("/api/workflows/update", vm.newWorkflow)
-                .then(function() {
-                        //success
-                        vm.newWorkflow = {};
-                    },
-                    function() {
+        vm.updateWorkflow = function () {
+
+            vm.newWorkflow.blocks = vm.blocks;
+
+            var params = { workflow: vm.newWorkflow, id: vm.oldWorkflowId };
+            $http.post("/api/workflows/update", params)
+                .then(function () {
+                    //success
+                    vm.newWorkflow = {};
+                    $window.location.href = '/ManageWorkflows';
+                },
+                    function () {
                         //failure
                     });
         };
 
         function addParallelDivs(val) {
             var res = '<div class="col-lg-6 paddingZero">'
-                +'<div ng-repeat="block in vm.paralellBlocks[' + val + '][0]" class="form-group row block">'
+                + '<div ng-repeat="block in vm.paralellBlocks[' + val + '][0]" class="form-group row block">'
                     + '<div class="col-lg-6">'
                         + '<label class="control-label">Název bloku</label>'
                         + '<div>'
@@ -319,6 +426,7 @@
 
         function BlockToAdd(parallel) {
             var blockToAdd = {
+                id: ++vm.blockId,
                 name: parallel.newBlock.name,
                 description: parallel.newBlock.description,
                 blockType: parallel.newBlock.blockType,
