@@ -12,7 +12,7 @@ namespace WFMDatabase.DML
         Workflow GetById(int id);
         Workflow Insert(Workflow workflow, string userId);
         Workflow Update(Workflow newWorkflow, int oldWorkflowId, string userId);
-        Workflow Delete(Workflow workflow);
+        Workflow Delete(int idWorkflow);
 
     }
 }

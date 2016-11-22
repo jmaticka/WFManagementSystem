@@ -64,8 +64,30 @@ namespace WFManagementSystem.Controllers
             return View();
         }
 
+        public ActionResult Delete(int id)
+        {
+            ViewBag.Workflow = _workflowManager.GetById(id);
+            return View();
+        }
+
+        // POST: ManageWorkflows/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                var result = _workflowManager.Delete(id);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
 
-        
+
+
     }
 }

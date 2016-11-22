@@ -1047,6 +1047,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\ManageUsers\Delete.cshtml" />
     <Content Include="Views\ManageWorkflows\Edit.cshtml" />
+    <Content Include="Views\ManageWorkflows\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

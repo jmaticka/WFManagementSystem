@@ -156,15 +156,16 @@ namespace WFMDatabase.DML
         }
 
 
-        public Workflow Delete(Workflow workflow)
+        public Workflow Delete(int idWorkflow)
         {
             try
             {
                 using (var dbContext = new DBContextWFManagementSystem())
                 {
-                    var res = dbContext.Workflows.Remove(workflow);
+                    var temp = dbContext.Workflows.FirstOrDefault(x => x.ID == idWorkflow);
+                    if (temp != null) temp.IsActual = false;
                     dbContext.SaveChanges();
-                    return res;
+                    return temp;
                 }
             }
             catch (Exception e)
