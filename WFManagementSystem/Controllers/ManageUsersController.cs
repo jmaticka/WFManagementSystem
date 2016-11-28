@@ -51,14 +51,17 @@ namespace WFManagementSystem.Controllers
             var users = new List<UserWithRoleNamesViewModel>();
             foreach (var user in UserManager.Users.ToList())
             {
-                users.Add(new UserWithRoleNamesViewModel
+                if (!(User.Identity.Name == user.UserName))
                 {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    Roles = UserRoles(user.Roles.ToList())
+                    users.Add(new UserWithRoleNamesViewModel
+                    {
+                        Id = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email,
+                        Roles = UserRoles(user.Roles.ToList())
 
-                });
+                    });
+                }
             }
 
 
@@ -101,20 +104,20 @@ namespace WFManagementSystem.Controllers
                 if (!user.Roles.Any(role => role.RoleId == model.UserRole))
                 {
                     var currentRole = UserManager.GetRoles(id).ToList().First();
-                    
+
                     using (var context = new DBContextWFManagementSystem())
                     {
                         var roleToAdd = context.Roles.FirstOrDefault(x => x.Id == model.UserRole).Name;
                         result = await UserManager.AddToRoleAsync(id, roleToAdd);
-                        
+
 
                     }
                     var resultRemoveRole = UserManager.RemoveFromRole(id, currentRole);
                     if (!result.Succeeded || !resultRemoveRole.Succeeded)
                     {
-                      
-                            return RedirectToAction("Index", new { Message = "Uživatel nebyl změnen: Problem s přiřazením role." });
-                        
+
+                        return RedirectToAction("Index", new { Message = "Uživatel nebyl změnen: Problem s přiřazením role." });
+
                     }
 
 
@@ -144,14 +147,15 @@ namespace WFManagementSystem.Controllers
                         }
                     }
                 }
-                if(result == null || result.Succeeded)
+                if (result == null || result.Succeeded)
                 {
                     user = await UserManager.FindByIdAsync(id);
                     user.Email = model.Email;
+                    user.UserName = model.Email;
                     result = await UserManager.UpdateAsync(user);
 
                 }
-                
+
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", new { Message = "Uživatel v pořádku změněn" });
