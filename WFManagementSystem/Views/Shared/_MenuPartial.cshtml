@@ -19,6 +19,8 @@
                         @if (User.IsInRole("Admin") || User.IsInRole("Garant"))
                         {
                             <li>@Html.ActionLink("Workflow", "Index", "ManageWorkflows")</li>
+                            <li>@Html.ActionLink("Procesy", "Index", "Process")</li>
+                            
                         }
                         @if (User.IsInRole("Admin"))
                         {

@@ -60,7 +60,9 @@
     <Compile Include="DBContextWFManagementSystem.cs" />
     <Compile Include="DML\DMLBlock.cs" />
     <Compile Include="DML\DMLBlockType.cs" />
+    <Compile Include="DML\DMLField.cs" />
     <Compile Include="DML\DMLWorkflow.cs" />
+    <Compile Include="DML\DMLWorkflowInstances.cs" />
     <Compile Include="DML\IDMLBlock.cs" />
     <Compile Include="DML\IDMLBlockType.cs" />
     <Compile Include="DML\IDMLField.cs" />

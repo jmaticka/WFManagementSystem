@@ -6,10 +6,11 @@ namespace WFMDatabase.DML
 {
     public interface IDMLWorkflowInstance
     {
-        List<WorkflowInstance> GetAllByUser(IdentityUser user);
         List<WorkflowInstance> GetAllByWorkflow(Workflow workflow);
         WorkflowInstance Insert(WorkflowInstance workflowInstance);
         WorkflowInstance Update(WorkflowInstance workflowInstance);
         WorkflowInstance Delete(WorkflowInstance workflowInstance);
+        List<WorkflowInstance> GetAll();
+        List<WorkflowInstance> GetAllByUser(string userId);
     }
 }

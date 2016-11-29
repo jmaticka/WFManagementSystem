@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\ManageWorkflowsController.cs" />
+    <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1048,6 +1049,10 @@
     <Content Include="Views\ManageUsers\Delete.cshtml" />
     <Content Include="Views\ManageWorkflows\Edit.cshtml" />
     <Content Include="Views\ManageWorkflows\Delete.cshtml" />
+    <Content Include="Views\Process\Create.cshtml" />
+    <Content Include="Views\Process\Details.cshtml" />
+    <Content Include="Views\Process\Index.cshtml" />
+    <Content Include="Views\Process\CreateProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

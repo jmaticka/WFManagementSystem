@@ -10,7 +10,7 @@ namespace WFMDatabase.DML
 {
     public interface IDMLBlock
     {
-        List<Block> GetAllByWorkflow(Workflow workflow);
+        List<Block> GetAllByWorkflow(int workflow);
         Block Insert(Block block);
         Block Update(Block block);
         Block Delete(Block block);

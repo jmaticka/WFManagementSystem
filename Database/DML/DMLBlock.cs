@@ -14,8 +14,9 @@ namespace WFMDatabase.DML
             throw new NotImplementedException();
         }
 
-        public List<Block> GetAllByWorkflow(Workflow workflow)
+        public List<Block> GetAllByWorkflow(int workflow)
         {
+            
             throw new NotImplementedException();
         }
 
