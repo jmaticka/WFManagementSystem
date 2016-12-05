@@ -91,6 +91,14 @@
     <Compile Include="Migrations\201611211220231_positionToBlocks.Designer.cs">
       <DependentUpon>201611211220231_positionToBlocks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612051500061_field is active.cs" />
+    <Compile Include="Migrations\201612051500061_field is active.Designer.cs">
+      <DependentUpon>201612051500061_field is active.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612051533351_field action and output.cs" />
+    <Compile Include="Migrations\201612051533351_field action and output.Designer.cs">
+      <DependentUpon>201612051533351_field action and output.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -112,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611211220231_positionToBlocks.resx">
       <DependentUpon>201611211220231_positionToBlocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051500061_field is active.resx">
+      <DependentUpon>201612051500061_field is active.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612051533351_field action and output.resx">
+      <DependentUpon>201612051533351_field action and output.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

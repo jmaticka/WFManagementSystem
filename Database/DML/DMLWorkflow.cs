@@ -40,6 +40,8 @@ namespace WFMDatabase.DML
                 var res = dbContext.Workflows
                     .Include(x => x.Blocks.Select(y => y.BlockType))
                     .Include(x => x.Blocks.Select(y => y.NextBlocks))
+                    .Include(x => x.UserCreated)
+                    .Include(x => x.Blocks.Select(y => y.Worker))
                     .FirstOrDefault(x => x.ID == id);
 
 
