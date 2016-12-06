@@ -48,10 +48,9 @@ if (block.BlockType.Name == "soubor")
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.WorkflowName)
     @Html.HiddenFor(m => m.WorkflowId)
-<<<<<<< HEAD
-=======
+
     Model.Fields = Model.Fields.OrderByDescending(x=>x.BlockId).ToList();
->>>>>>> 0c4c0cda2329f7bdde0b0ac6537722fa80b9a800
+
     for (int i = 0; i < Model.Fields.Count; i++)
     {
         @Html.HiddenFor(m => m.Fields[i])

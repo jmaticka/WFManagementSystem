@@ -2,9 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Database/obj/Debug/WFMDatabase.csprojResolveAssemblyReference.cache
-/Database/obj/Debug/WFMDatabase.Migrations.fixesIdentityUsers.resources
+/Database/obj
+/Database/bin
 /packages
 /WFManagementSystem/bin
 /WFManagementSystem/obj
-/Database/obj/Debug
