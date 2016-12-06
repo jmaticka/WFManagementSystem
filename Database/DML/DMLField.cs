@@ -8,7 +8,7 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    class DMLField: IDMLField
+    public class DMLField: IDMLField
     {
         public List<Field> GetAllByBlock(Block block)
         {
@@ -25,9 +25,37 @@ namespace WFMDatabase.DML
             throw new NotImplementedException();
         }
 
+        public List<Field> Insert(List<Field> fields)
+        {
+            return fields.Select(Insert).ToList();
+        }
+
         public Field Insert(Field field)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    
+                    var user =field.Worker != null ? dbContext.Users.FirstOrDefault(x => x.UserName == field.Worker.UserName): null;
+                    field.Worker = user;
+
+                    var workflowInstance =
+                        dbContext.WorkflowInstances.FirstOrDefault(x => x.ID == field.WorkflowInstance.ID);
+                    field.WorkflowInstance = workflowInstance;
+                    if (workflowInstance != null) field.DateTimeEnded = workflowInstance.DateTimeEnded;
+                    var block = dbContext.Blocks.FirstOrDefault(x => x.ID == field.Block.ID);
+                    field.Block = block;
+
+                   var res = dbContext.Fields.Add(field);
+                    dbContext.SaveChanges();
+                    return res;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Problem pridat workflow instanci: {0}", e);
+            }
         }
 
         public Field Update(Field field)

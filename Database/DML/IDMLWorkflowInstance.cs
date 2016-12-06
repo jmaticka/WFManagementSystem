@@ -7,7 +7,7 @@ namespace WFMDatabase.DML
     public interface IDMLWorkflowInstance
     {
         List<WorkflowInstance> GetAllByWorkflow(Workflow workflow);
-        WorkflowInstance Insert(WorkflowInstance workflowInstance);
+        WorkflowInstance Insert(WorkflowInstance workflowInstance, string userId);
         WorkflowInstance Update(WorkflowInstance workflowInstance);
         WorkflowInstance Delete(WorkflowInstance workflowInstance);
         List<WorkflowInstance> GetAll();

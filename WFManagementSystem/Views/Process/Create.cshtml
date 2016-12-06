@@ -7,7 +7,8 @@
 }
 @helper ModifyBlock(FieldBlockViewModel block, int i)
 {
-    @Html.HiddenFor(m => m.Fields[i].BlockId)
+    @Html.HiddenFor(m => m.Fields[i].Block.ID)
+
 SelectList users = new SelectList((List<ApplicationUser>)ViewBag.Users, "UserName", "UserName", block.Worker != null ? block.Worker.UserName : "");
 if (block.BlockType.Name == "rozdělení" || (block.BlockType.Name == "sloučení") || (block.BlockType.Name == "start") || (block.BlockType.Name == "konec"))
 {
@@ -49,11 +50,11 @@ if (block.BlockType.Name == "soubor")
     @Html.HiddenFor(m => m.WorkflowName)
     @Html.HiddenFor(m => m.WorkflowId)
 
-    Model.Fields = Model.Fields.OrderByDescending(x=>x.BlockId).ToList();
+    Model.Fields = Model.Fields.OrderByDescending(x=>x.Block.ID).ToList();
 
     for (int i = 0; i < Model.Fields.Count; i++)
     {
-        @Html.HiddenFor(m => m.Fields[i])
+       
         if (Model.Fields[i].Position == null)
         {
             <div class="form-group row block clear">

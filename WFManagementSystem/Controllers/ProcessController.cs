@@ -22,13 +22,15 @@ namespace WFManagementSystem.Controllers
         private IDMLWorkflow _workflowManager;
         private DMLWorkflowInstances _workflowInstancesManager;
         private DMLBlock _workflowBlockManager;
+        private IDMLField _fieldManager;
 
         public ProcessController()
         {
             _workflowManager = new DMLWorkflow();
             _workflowInstancesManager = new DMLWorkflowInstances();
             _workflowBlockManager= new DMLBlock();
-            
+            _fieldManager = new DMLField();
+
         }
         public ApplicationUserManager UserManager
         {
@@ -75,7 +77,7 @@ namespace WFManagementSystem.Controllers
                 WorkflowName = workflow.Name,
                 Fields = workflow.Blocks.Select(x=> new FieldBlockViewModel
                 {
-                    BlockId = x.ID,
+                    Block = x,
                     Name = x.Name,
                     Description = x.Description,
                     Worker = x.Worker,
@@ -98,8 +100,22 @@ namespace WFManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProcessViewModel vm)
         {
-            var test = vm;
+            WorkflowInstance instance = new WorkflowInstance
+            {
+                Workflow = _workflowManager.GetById(vm.WorkflowId),
+            };
+      
+            instance= _workflowInstancesManager.Insert(instance,User.Identity.GetUserId());
 
+            var fields = vm.Fields.Select(x=> new Field
+            {
+                WorkflowInstance = instance,
+                Worker = x.Worker,
+                Action = x.Action,
+                Block = x.Block
+            }).ToList();
+
+            var result = _fieldManager.Insert(fields);
             return RedirectToAction("Index");
         }
 

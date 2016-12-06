@@ -12,7 +12,7 @@ namespace WFManagementSystem.ViewModels
         public string Description { get; set; }
         public ApplicationUser Worker { get; set; }
         public string Action { get; set; }
-        public int BlockId { get; set; }
+        public Block Block { get; set; }
         public  BlockType BlockType { get; set; }
         public string Position { get; set; }
     }

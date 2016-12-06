@@ -9,6 +9,7 @@ namespace WFMDatabase.DML
         List<Field> GetAllByBlock(Block block);
         List<Field> GetAllByInstance(int workflowInstanceId);
         List<Field> GetAllByWorker(IdentityUser worker);
+        List<Field> Insert(List<Field> field);
         Field Insert(Field field);
         Field Update(Field field);
         Field Delete(Field field);
