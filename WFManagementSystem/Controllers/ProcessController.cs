@@ -52,18 +52,31 @@ namespace WFManagementSystem.Controllers
         }
 
         // GET: Process/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
+            var instance = _workflowInstancesManager.GetById(id);
+            var fields = _fieldManager.GetAllByInstance(instance.ID);
+            ProcessViewModel model = new ProcessViewModel
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Field field=null;
-            if (field == null)
-            {
-                return HttpNotFound();
-            }
-            return View(field);
+                WorkflowId = instance.Workflow.ID,
+                WorkflowName = instance.Workflow.Name,
+                DateTimeStarted = instance.DateTimeStarted,
+                Fields = fields.Select(x => new FieldBlockViewModel
+                {
+                    Name = x.Block.Name,
+                    Description = x.Block.Description,
+                    Position = x.Block.Position,
+                    BlockType = x.Block.BlockType,
+                    Block = x.Block,
+                    Worker = x.Worker,
+                    IsActive = x.IsActive,
+                    Action = x.Action,
+                    Output = x.Output,
+                    DateTimeEnded = x.DateTimeEnded
+                }).ToList()
+            };
+
+            return View(model);
         }
 
         // GET: Process/Create

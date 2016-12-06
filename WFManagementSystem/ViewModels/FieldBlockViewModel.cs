@@ -15,5 +15,12 @@ namespace WFManagementSystem.ViewModels
         public Block Block { get; set; }
         public  BlockType BlockType { get; set; }
         public string Position { get; set; }
+
+
+        //just for detail
+        public bool IsActive { get; set; }
+        public string Output { get; set; }
+        public DateTime DateTimeEnded { get; set; }
+
     }
 }

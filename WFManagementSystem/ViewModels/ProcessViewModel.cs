@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WFMDatabase.Entities;
 
 namespace WFManagementSystem.ViewModels
@@ -8,5 +9,7 @@ namespace WFManagementSystem.ViewModels
         public List<FieldBlockViewModel> Fields { get; set; }
         public int WorkflowId { get; set; }
         public string WorkflowName { get; set; }
+        public DateTime DateTimeStarted { get; set; }
+
     }
 }

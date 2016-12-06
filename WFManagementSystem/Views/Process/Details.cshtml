@@ -1,34 +1,175 @@
-﻿@model WFMDatabase.Entities.Field
+﻿@using WFManagementSystem.ViewModels
+@model ProcessViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detail běžícího procesu";
 }
 
-<h2>Details</h2>
+@helper ModifyBlock(FieldBlockViewModel block, int i)
+{
+if (block.BlockType.Name == "rozdělení" || (block.BlockType.Name == "sloučení") || (block.BlockType.Name == "start") || (block.BlockType.Name == "konec"))
+{
+    return;
+}
+    <div class="col-lg-6">
+
+        <label class="control-label">Uživatel: </label>
+        <div>
+            <span class="form-control">@(Model.Fields[i].Worker.UserName ?? "")</span>
+        </div>
+
+    </div>
+if (block.BlockType.Name == "aktivita")
+{
+        <div class="col-lg-6">
+            <label class="control-label">Aktivita: </label>
+            <div>
+                <span class="form-control">@(Model.Fields[i].Action ?? "")</span>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <label class="control-label">Výstup: </label>
+            <div>
+                <span class="form-control">@(Model.Fields[i].Output ?? "")</span>
+            </div>
+        </div>
+}
+if (block.BlockType.Name == "soubor")
+{
+        <div class="col-lg-6">
+            <label class="control-label">Popis soubor</label>
+            <div>
+                <span class="form-control">@(Model.Fields[i].Action ?? "")</span>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <label class="control-label">Soubor: </label>
+            <div>
+                <span class="form-control">@(Model.Fields[i].Output ?? "")</span>
+            </div>
+        </div>
+}
+}
+
+
+
+<h2>Detail běžícího procesu</h2>
 
 <div>
-    <h4>Field</h4>
+    <h3 class="text-center">@Model.WorkflowName</h3>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Value)
-        </dt>
+    @for (int i = 0; i < Model.Fields.Count; i++)
+    {
 
-        <dd>
-            @Html.DisplayFor(model => model.Value)
-        </dd>
+        if (Model.Fields[i].Position == null)
+        {
+            <div class="form-group row block clear
+                 @(Model.Fields[i].DateTimeEnded > Model.DateTimeStarted ? "success" : "")
+                 @(Model.Fields[i].IsActive ? "waiting" : "")
+                 ">
+                <div class="col-lg-12 text-center">
+                    <h4>
+                        @(Model.Fields[i].Name ?? "")
+                        @(Model.Fields[i].DateTimeEnded > Model.DateTimeStarted ? " - hotovo" : "")
+                        @(Model.Fields[i].IsActive ? " - čeká na akci uživatele" : "")
+                    </h4>
+                </div>
+                <div class="col-lg-6">
+                    <label class="control-label">Typ bloku</label>
+                    <div>
+                        <span class="form-control">@(Model.Fields[i].BlockType.Name ?? "")</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label class="control-label">Popis bloku</label>
+                    <div>
+                        <span class="form-control">@(Model.Fields[i].Description ?? "")</span>
+                    </div>
+                </div>
+                @ModifyBlock(Model.Fields[i], i)
+            </div>
+        }
+        if (Model.Fields[i].Position != null)
+        {
+            var index = i;
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateTimeEnded)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateTimeEnded)
-        </dd>
-
-    </dl>
+            <div class="col-lg-6 paddingZero">
+                @while (Model.Fields[i].Position != null)
+                {
+                    if (Model.Fields[i].Position == "left")
+                    {
+                        <div class="form-group row block
+                             @(Model.Fields[i].DateTimeEnded > Model.DateTimeStarted ? "success" : "")
+                             @(Model.Fields[i].IsActive ? "waiting" : "")
+                             ">
+                            <div class="col-lg-12 text-center">
+                                <h4>
+                                    @(Model.Fields[i].Name ?? "")
+                                    @(Model.Fields[i].DateTimeEnded > Model.DateTimeStarted ? " - hotovo" : "")
+                                    @(Model.Fields[i].IsActive ? " - čeká na akci uživatele" : "")
+                                </h4>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label">Typ bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].BlockType.Name ?? "")</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label">Popis bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].Description ?? "")</span>
+                                </div>
+                            </div>
+                            @ModifyBlock(Model.Fields[i], i)
+                        </div>
+                    }
+                    i++;
+                }
+            </div>
+            i = index;
+            <div class="col-lg-6 paddingZero">
+                @while (Model.Fields[i].Position != null)
+                {
+                    if (Model.Fields[i].Position == "right")
+                    {
+                        <div class="form-group row block
+                             @(Model.Fields[i].DateTimeEnded > Model.DateTimeStarted ? "success" : "")
+                             @(Model.Fields[i].IsActive ? "waiting" : "")
+                             ">
+                            <div class="col-lg-12 text-center">
+                                <h4>
+                                    @(Model.Fields[i].Name ?? "")
+                                    @(Model.Fields[i].DateTimeEnded > Model.DateTimeStarted ? " - hotovo" : "")
+                                    @(Model.Fields[i].IsActive ? " - čeká na akci uživatele" : "")
+                                </h4>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label">Typ bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].BlockType.Name ?? "")</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label">Popis bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].Description ?? "")</span>
+                                </div>
+                            </div>
+                            @ModifyBlock(Model.Fields[i], i)
+                        </div>
+                    }
+                    i++;
+                }
+            </div>
+            i--;
+        }
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="form-group row">
+
+    <div class="col-lg-12">
+        <strong> @Html.ActionLink("Zpět", "Index", "Process", htmlAttributes: new { @class = "btn btn-primary form-control" })</strong>
+    </div>
+
+</div>

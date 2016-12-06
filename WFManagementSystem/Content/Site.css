@@ -21,6 +21,14 @@
     text-decoration: none;
 }
 
+.success {
+    background-color: #dff0d8;
+}
+
+.waiting {
+    background-color: #fcf8e3;
+}
+
 
 
 

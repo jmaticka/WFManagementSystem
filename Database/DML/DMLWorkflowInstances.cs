@@ -10,8 +10,27 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    public class DMLWorkflowInstances: IDMLWorkflowInstance
+    public class DMLWorkflowInstances : IDMLWorkflowInstance
     {
+        public WorkflowInstance GetById(int id)
+        {
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    return dbContext.WorkflowInstances
+                        .Include(x => x.Workflow)
+                        .Include(x => x.UserStarted)
+                        .FirstOrDefault(x => x.ID == id)
+                    ;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Problem ziskat workflow instanci: {0}", e);
+            }
+        }
+
         public List<WorkflowInstance> GetAllByWorkflow(Workflow workflow)
         {
             throw new NotImplementedException();
@@ -58,9 +77,9 @@ namespace WFMDatabase.DML
         {
             using (var db = new DBContextWFManagementSystem())
             {
-                return db.WorkflowInstances.Where(x=>x.DateTimeEnded!=null)
-                    .Include(x=>x.Workflow)
-                    .Include(x=>x.UserStarted).ToList();
+                return db.WorkflowInstances.Where(x => x.DateTimeEnded != null)
+                    .Include(x => x.Workflow)
+                    .Include(x => x.UserStarted).ToList();
             }
         }
 

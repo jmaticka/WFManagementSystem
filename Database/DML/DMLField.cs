@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,23 @@ namespace WFMDatabase.DML
 
         public List<Field> GetAllByInstance(int workflowInstanceId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var res = dbContext.Fields
+                        .Where(x => x.WorkflowInstance.ID == workflowInstanceId)
+                        .Include(x => x.Block)
+                        .Include(x => x.Block.BlockType)
+                        .Include(x => x.Worker)
+                        .ToList();
+                    return res;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Problem ziskat workflow instanci: {0}", e);
+            }
         }
 
         public List<Field> GetAllByWorker(IdentityUser worker)
