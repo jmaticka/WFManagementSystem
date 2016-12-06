@@ -1,0 +1,138 @@
+﻿@using WFManagementSystem.ViewModels
+@using WFMDatabase.Entities
+@model ProcessViewModel
+
+@{
+    ViewBag.Title = "Vytvoř proces";
+}
+@helper ModifyBlock(FieldBlockViewModel block, int i)
+{
+    @Html.HiddenFor(m => m.Fields[i].BlockId)
+SelectList users = new SelectList((List<ApplicationUser>)ViewBag.Users, "UserName", "UserName", block.Worker != null ? block.Worker.UserName : "");
+if (block.BlockType.Name == "rozdělení" || (block.BlockType.Name == "sloučení") || (block.BlockType.Name == "start") || (block.BlockType.Name == "konec"))
+{
+    return;
+}
+    <div class="col-lg-6">
+
+        <label class="control-label">Uživatel: </label>
+        @Html.DropDownListFor(model => model.Fields[i].Worker.UserName, users, new { @class = "form-control" })
+
+    </div>
+if (block.BlockType.Name == "aktivita")
+{
+        <div class="col-lg-6">
+            <label class="control-label">Aktivita</label>
+            <div>
+                @Html.TextBoxFor(model => model.Fields[i].Action, new { @class = "form-control" })
+                @*<input type="text" class="form-control" />*@
+            </div>
+        </div>
+}
+if (block.BlockType.Name == "soubor")
+{
+        <div class="col-lg-6">
+            <label class="control-label">Popis soubor</label>
+            <div>
+                @Html.TextBoxFor(model => model.Fields[i].Action, new { @class = "form-control" })
+            </div>
+        </div>
+}
+}
+
+<h2>Vytvoř proces</h2>
+<h3 class="text-center">@Model.WorkflowName</h3>
+
+@using (Html.BeginForm("Create", "Process", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.WorkflowName)
+    @Html.HiddenFor(m => m.WorkflowId)
+    for (int i = 0; i < Model.Fields.Count; i++)
+    {
+        @Html.HiddenFor(m => m.Fields[i])
+        if (Model.Fields[i].Position == null)
+        {
+            <div class="form-group row block clear">
+                <div class="col-lg-6">
+                    <label class="control-label">Název bloku</label>
+                    <div>
+                        <span class="form-control">@(Model.Fields[i].Name ?? "")</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label class="control-label">Popis bloku</label>
+                    <div>
+                        <span class="form-control">@(Model.Fields[i].Description ?? "")</span>
+                    </div>
+                </div>
+                @ModifyBlock(Model.Fields[i], i)
+            </div>
+        }
+        if (Model.Fields[i].Position != null)
+        {
+            var index = i;
+            
+            <div class="col-lg-6 paddingZero">
+                @while (Model.Fields[i].Position != null)
+                {
+                    if (Model.Fields[i].Position == "left")
+                    {
+                        <div class="form-group row block">
+                            <div class="col-lg-6">
+                                <label class="control-label">Název bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].Name ?? "")</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label">Popis bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].Description ?? "")</span>
+                                </div>
+                            </div>
+                            @ModifyBlock(Model.Fields[i], i)
+                        </div>
+                    }
+                    i++;
+                }
+            </div>
+            i = index;
+            <div class="col-lg-6 paddingZero">
+                @while (Model.Fields[i].Position != null)
+                {
+                    if (Model.Fields[i].Position == "right")
+                    {
+                        <div class="form-group row block">
+                            <div class="col-lg-6">
+                                <label class="control-label">Název bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].Name ?? "")</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="control-label">Popis bloku</label>
+                                <div>
+                                    <span class="form-control">@(Model.Fields[i].Description ?? "")</span>
+                                </div>
+                            </div>
+                            @ModifyBlock(Model.Fields[i], i)
+                        </div>
+                    }
+                    i++;
+                }
+            </div>
+            i--;
+        }
+    }
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <strong><input type="submit" value="ulož" class="btn btn-success form-control" /></strong>
+        </div>
+        <div class="col-lg-6">
+            <strong> @Html.ActionLink("Zpátky", "Index", "Process", htmlAttributes: new { @class = "btn btn-danger form-control" })</strong>
+        </div>
+
+    </div>
+}
+

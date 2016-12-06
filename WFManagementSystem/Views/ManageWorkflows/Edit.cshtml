@@ -1,0 +1,129 @@
+﻿@using WFMDatabase.Entities
+
+@{
+    ViewBag.Title = "Editace workflow";
+    List<BlockType> BlockTypes = ViewBag.BlockTypes;
+    Workflow workflow = ViewBag.Workflow;
+    List<ApplicationUser> Users = ViewBag.Users;
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/angularWorkflow")
+}
+
+<h2 class="text-center">Editace Workflow</h2>
+
+
+<div ng-app="app-workflow">
+
+    @Html.AntiForgeryToken()
+    <div ng-controller="workflowController as vm">
+        <form novalidate name="newWorkflowForm">
+
+            <div class="form-group first text-center">
+                <label for="workflowName" class="control-label">Název workflow</label>
+                <div>
+                    <input type="text" id="workflowName" name="workflowName" class="form-control" ng-model="vm.newWorkflow.name" />
+                </div>
+            </div>
+
+            <script>
+
+
+                data = {
+                    
+
+                    workers: [
+                        @foreach (var user in Users)
+                {
+                    @Html.Raw("{id:'"+user.Id+"', name:'"+user.UserName+"'},\r\n");
+                }
+                    ],
+                    blockTypes: [
+                        @foreach (var block in BlockTypes)
+                {
+                    @Html.Raw("{id:'"+block.ID+"', name:'"+block.Name+"'},\r\n");
+                }
+                    ]
+                };
+
+                editedWorkflow = {
+                    name:"@workflow.Name",
+                    id: "@workflow.ID"
+
+                }
+
+
+            </script>
+
+
+            <htmldiv content="vm.htmlCode"></htmldiv>
+
+
+            <div class="form-group row clear" ng-init="vm.initEditWorkflow()" id="control">
+                <div novalidate name="{{parallel.name}}" id="{{parallel.name}}" ng-repeat="parallel in vm.parallels" class="col-lg-{{12/vm.parallels.length}} formBlock row">
+
+                    <div class="col-lg-6">
+                        <label for="name" class="control-label">Název bloku</label>
+                        <div>
+                            <input type="text" id="name" name="name" class="form-control" ng-model="parallel.newBlock.name" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label for="description" class="control-label">Popis bloku</label>
+                        <div>
+                            <input type="text" id="desciption" name="description" class="form-control" ng-model="parallel.newBlock.description" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label for="worker" class="control-label">Výchozí uživatel</label>
+                        <div>
+                            <select class="form-control" id="worker" name="worker" ng-model="parallel.newBlock.worker" ng-options="option.name for option in vm.data.workers"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="blockType" class="control-label">Typ bloku</label>
+                        <div>
+                            <select class="form-control" id="blockType" name="blockType" ng-init="vm.initStart(parallel)" ng-model="parallel.newBlock.blockType" ng-options="option.name for option in vm.data.blockTypes"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <button ng-click="vm.addBlock(parallel)"
+                                class="btn btn-primary form-control addBlock">
+                            Přidat nový blok workflow
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <button ng-click="vm.updateWorkflow()"
+                            class="btn btn-success form-control"
+                            ng-disabled="newWorkflowForm.$invalid">
+                        ulož
+                    </button>
+                    <span ng-show="newWorkflowForm.$invalid" class="text-warning">Je třeba přidat koncový blok</span>
+
+                </div>
+                <div class="col-lg-6">
+                    <strong>@Html.ActionLink("zrušit", "Index", "ManageWorkflows", htmlAttributes: new { @class = "btn btn-danger form-control" })</strong>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+</div>
+
