@@ -6,13 +6,14 @@ namespace WFMDatabase.DML
 {
     public interface IDMLField
     {
-        List<Field> GetAllByBlock(Block block);
+        Field GetFiled(Field field);
         List<Field> GetAllByInstance(int workflowInstanceId);
         List<Field> GetAllByWorker(IdentityUser worker);
         List<Field> Insert(List<Field> field);
         Field Insert(Field field);
         Field Update(Field field);
         Field Delete(Field field);
+        Field GetFieldSuccessorByBlockId(int blockId, int workflowInstanceId);
 
     }
 }

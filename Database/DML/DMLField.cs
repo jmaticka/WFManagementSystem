@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,27 @@ using WFMDatabase.Entities;
 
 namespace WFMDatabase.DML
 {
-    public class DMLField: IDMLField
+    public class DMLField : IDMLField
     {
-        public List<Field> GetAllByBlock(Block block)
+        public Field GetFiled(Field field)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var result = dbContext.Fields.Where(x => x.ID == field.ID)
+                        .Include(x => x.Block)
+                        .Include(x => x.Block.BlockType)
+                        .Include(x => x.Block.NextBlocks)
+                        .Include(x => x.WorkflowInstance)
+                        .FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Problem ziskat field: {0}", e);
+            }
         }
 
         public List<Field> GetAllByInstance(int workflowInstanceId)
@@ -53,8 +70,10 @@ namespace WFMDatabase.DML
             {
                 using (var dbContext = new DBContextWFManagementSystem())
                 {
-                    
-                    var user =field.Worker != null ? dbContext.Users.FirstOrDefault(x => x.UserName == field.Worker.UserName): null;
+
+                    var user = field.Worker != null
+                        ? dbContext.Users.FirstOrDefault(x => x.UserName == field.Worker.UserName)
+                        : null;
                     field.Worker = user;
 
                     var workflowInstance =
@@ -64,7 +83,7 @@ namespace WFMDatabase.DML
                     var block = dbContext.Blocks.FirstOrDefault(x => x.ID == field.Block.ID);
                     field.Block = block;
 
-                   var res = dbContext.Fields.Add(field);
+                    var res = dbContext.Fields.Add(field);
                     dbContext.SaveChanges();
                     return res;
                 }
@@ -77,12 +96,51 @@ namespace WFMDatabase.DML
 
         public Field Update(Field field)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var toModify = dbContext.Fields.FirstOrDefault(x => x.ID == field.ID);
+                    if (toModify != null)
+                    {
+                        toModify.DateTimeEnded = field.DateTimeEnded;
+                        toModify.IsActive = field.IsActive;
+                        toModify.Output = field.Output;
+                    }
+                    dbContext.SaveChanges();
+                    return toModify;
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Problem update field: {0}", exception);
+            }
         }
 
         public Field Delete(Field field)
         {
             throw new NotImplementedException();
+        }
+
+        public Field GetFieldSuccessorByBlockId(int blockId,int workflowInstanceId)
+        {
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var result = dbContext.Fields.Where(x => x.Block.ID == blockId && x.WorkflowInstance.ID == workflowInstanceId)
+                        .Include(x => x.Block)
+                        .Include(x => x.Block.BlockType)
+                        .Include(x => x.Block.NextBlocks)
+                        .Include(x => x.WorkflowInstance)
+                        .FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Problem ziskat field: {0}", e);
+            }
         }
     }
 }

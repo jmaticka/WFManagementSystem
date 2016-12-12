@@ -5,10 +5,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
+using WFManagementSystem.Helpers;
 using WFManagementSystem.ViewModels;
 using WFMDatabase;
 using WFMDatabase.DML;
@@ -111,7 +113,7 @@ namespace WFManagementSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProcessViewModel vm)
+        public async Task<ActionResult> Create(ProcessViewModel vm)
         {
             WorkflowInstance instance = new WorkflowInstance
             {
@@ -127,8 +129,9 @@ namespace WFManagementSystem.Controllers
                 Action = x.Action,
                 Block = x.Block
             }).ToList();
-
+            var processHandler = new ProcessHandler();
             var result = _fieldManager.Insert(fields);
+             var result2 = await processHandler.ProcessTheField(fields.First());
             return RedirectToAction("Index");
         }
 
