@@ -198,7 +198,6 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FieldBlockViewModel.cs" />
     <Compile Include="ViewModels\ManageUsersViewModel.cs" />
-    <Compile Include="ViewModels\ProcessStepViewModel.cs" />
     <Compile Include="ViewModels\ManageWorkflowsViewModel.cs" />
     <Compile Include="ViewModels\ProcessViewModel.cs" />
     <Compile Include="ViewModels\UserWithRoleNamesViewModel.cs" />

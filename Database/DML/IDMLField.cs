@@ -6,9 +6,9 @@ namespace WFMDatabase.DML
 {
     public interface IDMLField
     {
-        Field GetFiled(Field field);
+        Field GetFiled(int fieldId);
         List<Field> GetAllByInstance(int workflowInstanceId);
-        List<Field> GetAllByWorker(IdentityUser worker);
+        List<Field> GetAllByWorker(string workerId);
         List<Field> Insert(List<Field> field);
         Field Insert(Field field);
         Field Update(Field field);

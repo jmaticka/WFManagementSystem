@@ -1,8 +1,7 @@
-﻿@using System.Activities.Statements
-@using WFManagementSystem.ViewModels
+﻿@using WFMDatabase.Entities
 @{
     ViewBag.Title = "Home Page";
-    var testData = (List<ProcessStepViewModel>)ViewBag.testData;
+    var testData = (List<Field>)ViewBag.Fields;
 }
 
 <div class="container">
@@ -21,11 +20,11 @@
             {
 
                 <tr>
-                    <td>@process.Name</td>
-                    <td>@process.StartedDate.Date</td>
+                    <td>@process.Block.Name</td>
+                    <td>@process.Action</td>
                     <td>
                         <span class="btn btn-primary btn-sm">
-                            @Html.ActionLink("Vykonat akci", "PerformAction", "Home", routeValues: new {id = @process.Id}, htmlAttributes: null)
+                            @Html.ActionLink("Vykonat akci", "PerformAction", "Home", routeValues: new {id = @process.ID}, htmlAttributes: null)
                         </span>
                     </td>
                 </tr>

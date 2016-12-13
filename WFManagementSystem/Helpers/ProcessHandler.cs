@@ -76,6 +76,20 @@ namespace WFManagementSystem.Helpers
             return true;
         }
 
+        public async void FinishTask(Field fieldToProcess)
+        {
+            var result = _fieldManager.GetFiled(fieldToProcess);
+
+            result.IsActive = false;
+            await Task.Delay(1000);
+            result.DateTimeEnded = DateTime.Now;
+
+            _fieldManager.Update(result);
+
+            var nextField = MoveToNextField(result);
+            await ProcessTheField(nextField);
+        }
+
         public Field MoveToNextField(Field field)
         {
             var result = _fieldManager.GetFieldSuccessorByBlockId(field.Block.NextBlocks.First().ID, field.WorkflowInstance.ID);

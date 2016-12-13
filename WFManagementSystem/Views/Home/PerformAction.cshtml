@@ -1,13 +1,12 @@
-﻿@using WFManagementSystem.ViewModels
-@model ProcessStepViewModel
+﻿@using WFMDatabase.Entities
+@model Field
 
 @{
     ViewBag.Title = "PerformAction";
-    var field = (ProcessStepViewModel)ViewBag.Field;
 }
 
-<h2>@field.Name</h2>
-<p>@field.Description</p>
+<h2>@Model.Block.Name</h2>
+<p>@Model.Action</p>
 <form>
     <div class="form-group">
         <label>Schválit?</label>

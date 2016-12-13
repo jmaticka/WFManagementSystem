@@ -12,13 +12,13 @@ namespace WFMDatabase.DML
 {
     public class DMLField : IDMLField
     {
-        public Field GetFiled(Field field)
+        public Field GetFiled(int fieldId)
         {
             try
             {
                 using (var dbContext = new DBContextWFManagementSystem())
                 {
-                    var result = dbContext.Fields.Where(x => x.ID == field.ID)
+                    var result = dbContext.Fields.Where(x => x.ID == fieldId)
                         .Include(x => x.Block)
                         .Include(x => x.Block.BlockType)
                         .Include(x => x.Block.NextBlocks)
@@ -50,13 +50,30 @@ namespace WFMDatabase.DML
             }
             catch (Exception e)
             {
-                throw new Exception("Problem ziskat workflow instanci: {0}", e);
+                throw new Exception("Problem ziskat field na zaklade instance: {0}", e);
             }
         }
 
-        public List<Field> GetAllByWorker(IdentityUser worker)
+        public List<Field> GetAllByWorker(string workerId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var res = dbContext.Fields
+                        .Where(x => x.Worker.Id == workerId)
+                        .Where(x => x.IsActive)
+                        .Include(x => x.Block)
+                        .Include(x => x.Block.BlockType)
+                        .Include(x => x.Worker)
+                        .ToList();
+                    return res;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Problem ziskat field na zaklade uzivatele: {0}", e);
+            }
         }
 
         public List<Field> Insert(List<Field> fields)
