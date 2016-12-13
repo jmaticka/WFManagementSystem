@@ -7,13 +7,13 @@ namespace WFMDatabase.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class positionToBlocks : IMigrationMetadata
+    public sealed partial class fix : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(positionToBlocks));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fix));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611211220231_positionToBlocks"; }
+            get { return "201612131627118_fix"; }
         }
         
         string IMigrationMetadata.Source
