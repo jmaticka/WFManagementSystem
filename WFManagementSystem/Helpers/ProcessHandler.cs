@@ -24,7 +24,7 @@ namespace WFManagementSystem.Helpers
             {
                 return true;
             }
-            var result = _fieldManager.GetFiled(fieldToProcess);
+            var result = _fieldManager.GetFiled(fieldToProcess.ID);
             if (result.Block.BlockType.Name == "start" || result.Block.BlockType.Name == "konec" || result.Block.BlockType.Name == "rozdělení")
             {
                 result.IsActive = false;
@@ -78,7 +78,7 @@ namespace WFManagementSystem.Helpers
 
         public async void FinishTask(Field fieldToProcess)
         {
-            var result = _fieldManager.GetFiled(fieldToProcess);
+            var result = _fieldManager.GetFiled(fieldToProcess.ID);
 
             result.IsActive = false;
             await Task.Delay(1000);
