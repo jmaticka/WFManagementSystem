@@ -12,6 +12,7 @@ namespace WFMDatabase.DML
         List<Field> Insert(List<Field> field);
         Field Insert(Field field);
         Field Update(Field field);
+        Field UpdateUser(Field field);
         Field Delete(Field field);
         Field GetFieldSuccessorByBlockId(int blockId, int workflowInstanceId);
 

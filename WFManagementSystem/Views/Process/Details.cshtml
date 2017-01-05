@@ -34,6 +34,21 @@ if (block.BlockType.Name == "aktivita")
             </div>
         </div>
 }
+if (block.BlockType.Name == "api")
+{
+        <div class="col-lg-6">
+            <label class="control-label">Aktivita: </label>
+            <div>
+                <span class="form-control">@(Model.Fields[i].Action ?? "")</span>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <label class="control-label">Cena: </label>
+            <div>
+                <span class="form-control">@(Model.Fields[i].Output ?? "") EUR</span>
+            </div>
+        </div>
+}
 if (block.BlockType.Name == "soubor")
 {
         <div class="col-lg-6">
@@ -43,9 +58,9 @@ if (block.BlockType.Name == "soubor")
             </div>
         </div>
         <div class="col-lg-12">
-            <label class="control-label">Soubor: </label>
+            <label class="control-label">Cena: </label>
             <div>
-                <span class="form-control">@(Model.Fields[i].Output ?? "")</span>
+                <span class="form-control">@(Model.Fields[i].Output ?? "") CZK</span>
             </div>
         </div>
 }

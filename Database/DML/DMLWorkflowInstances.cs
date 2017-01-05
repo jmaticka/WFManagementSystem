@@ -65,7 +65,14 @@ namespace WFMDatabase.DML
 
         public WorkflowInstance Update(WorkflowInstance workflowInstance)
         {
-            throw new NotImplementedException();
+            
+            using (var db = new DBContextWFManagementSystem())
+            {
+                var oldWorkFlowInstance = db.WorkflowInstances.FirstOrDefault(x => x.ID == workflowInstance.ID);
+                if (oldWorkFlowInstance != null) oldWorkFlowInstance.DateTimeEnded = workflowInstance.DateTimeEnded;
+                db.SaveChanges();
+                return workflowInstance;
+            }
         }
 
         public WorkflowInstance Delete(WorkflowInstance workflowInstance)

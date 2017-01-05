@@ -1,5 +1,5 @@
-﻿@using WFMDatabase.Entities
-@model Field
+﻿@using WFManagementSystem.ViewModels
+@model FieldViewModel
 
 @{
     ViewBag.Title = "PerformAction";
@@ -7,21 +7,69 @@
 
 <h2>@Model.Block.Name</h2>
 <p>@Model.Action</p>
-<form>
-    <div class="form-group">
-        <label>Schválit?</label>
-        <div class="col-md-10">
-            <input class="form-control" type="checkbox" />
+@using (Html.BeginForm("PerformAction", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ID)
+
+    <form>
+        <div class="form-group">
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <label class="control-label">Ukončení Workflow:</label>
+                    @Html.CheckBoxFor(model => model.StopWorkflow, new { @class = "form-control" })
+                </div>
+            </div>
+            @if (@Model.Block.BlockType.Name == "soubor")
+            {
+                <div class="form-group row">
+                    
+                        <div class="col-md-10">
+                            <label class="control-label">Nahrejte požadovaný soubor</label>
+                            <input id="file" name="file" type="file"/>
+                            <label class="control-label">Napište celkovou cenu</label>
+                            @Html.TextBoxFor(model => model.Output, new { @class = "form-control" })
+                        </div>
+                </div>
+            }
+
+            @if (@Model.Block.BlockType.Name == "aktivita")
+            {
+                <div class="form-group row">
+                    <div class="col-md-10">
+                        <label class="control-label">Potvrďte provedení dané aktivity</label>
+                        @Html.CheckBoxFor(model=>model.Confirm, new {@class= "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-10">
+                        <label class="control-label">Zadejte Váš popis</label>
+                        @Html.TextBoxFor(model => model.Output, new { @class = "form-control" })
+                    </div>
+                </div>
+            }
+
+            @if (@Model.Block.BlockType.Name == "rozhodnutí")
+            {
+                <div class="form-group row">
+                    <label class="control-label">Rozhodněte:</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Output, new { @class = "form-control" })
+                    </div>
+                </div>
+            }
+
         </div>
-
-    </div>
-    <div class="form-group">
-        <input type="submit" value="odeslat" class="btn btn-success" />
-        <span class="btn btn-danger">
-            @Html.ActionLink("zrušit", "Index")
-        </span>
-
-    </div>
-
-
-</form>
+        <div class="form-group">
+            <div class="col-lg-5">
+                <input type="submit" value="odeslat" class="btn btn-success form-control" />
+            </div>
+            <div class="col-lg-5">
+                <span class="btn btn-danger form-control">
+                @Html.ActionLink("zrušit", "Index")
+            </span>
+            </div>
+        </div>
+    </form>
+}

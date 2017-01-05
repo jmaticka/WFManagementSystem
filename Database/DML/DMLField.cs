@@ -23,6 +23,7 @@ namespace WFMDatabase.DML
                         .Include(x => x.Block.BlockType)
                         .Include(x => x.Block.NextBlocks)
                         .Include(x => x.WorkflowInstance)
+                        .Include(x=>x.Worker)
                         .FirstOrDefault();
                     return result;
                 }
@@ -131,6 +132,28 @@ namespace WFMDatabase.DML
             catch (Exception exception)
             {
                 throw new Exception("Problem update field: {0}", exception);
+            }
+        }
+
+        public Field UpdateUser(Field field)
+        {
+            try
+            {
+                using (var dbContext = new DBContextWFManagementSystem())
+                {
+                    var toModify = dbContext.Fields.FirstOrDefault(x => x.ID == field.ID);
+                    var user = dbContext.Users.FirstOrDefault(x => x.UserName == "admin@test.com");
+                    if (toModify != null)
+                    {
+                        toModify.Worker = user;
+                    }
+                    dbContext.SaveChanges();
+                    return toModify;
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Problem update useru field: {0}", exception);
             }
         }
 

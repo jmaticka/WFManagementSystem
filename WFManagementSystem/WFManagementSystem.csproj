@@ -190,6 +190,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CurrencyAPI.cs" />
     <Compile Include="Helpers\ProcessHandler.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FieldBlockViewModel.cs" />
+    <Compile Include="ViewModels\FieldViewModel.cs" />
     <Compile Include="ViewModels\ManageUsersViewModel.cs" />
     <Compile Include="ViewModels\ManageWorkflowsViewModel.cs" />
     <Compile Include="ViewModels\ProcessViewModel.cs" />
